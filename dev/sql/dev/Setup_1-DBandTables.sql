@@ -51,6 +51,7 @@ CREATE TABLE `session` (
   `session_id` varchar(64) COLLATE utf8mb4_general_ci NOT NULL,
   `user_id` int(11) NOT NULL,
   `user_agent` varchar(240) COLLATE utf8mb4_general_ci NOT NULL,
+  `user_ip` VARCHAR(15) NULL,
   `session_created` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
   `last_active` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -59,8 +60,8 @@ ALTER TABLE `session`
   ADD PRIMARY KEY (`session_id`),
   ADD CONSTRAINT `foreign_user_id` FOREIGN KEY (`user_id`) REFERENCES `member`(`id`) ON UPDATE CASCADE ON DELETE CASCADE;
 
-INSERT INTO `member` (`id`, `username`, `email`, `email_verified`, `email_code`, `email_code_expire`, `access`, `sec_level`, `created_date`, `banned`, `last_updated`) VALUES
-(1, 'Architect', 'mr.t.gammage@gmail.com', 1, NULL, '2018-12-08 20:40:46', '$2y$10$ITmP0pW7z.bJnFX4PUnMaOkXcjMPopQNb1RWToo9ylNi9KWkILisC', 10, '2018-12-07 01:18:39', 0, '2018-12-07 01:18:39');
+INSERT INTO `member` (`id`, `username`, `email`, `email_verified`, `access`, `sec_level`, `created_date`, `last_updated`) VALUES
+(1, 'Architect', 'mr.t.gammage@gmail.com', 1, '$2y$10$ITmP0pW7z.bJnFX4PUnMaOkXcjMPopQNb1RWToo9ylNi9KWkILisC', 10, '2018-12-07 01:18:39', '2018-12-07 01:18:39');
 
 --
 --
@@ -85,7 +86,7 @@ ALTER TABLE `member`
   ADD PRIMARY KEY (`id`);
 
 
-INSERT INTO `member` (`id`, `username`) VALUES
+INSERT INTO `member` (`id`, `location`) VALUES
 (1, 'Account Creation');
 
 
