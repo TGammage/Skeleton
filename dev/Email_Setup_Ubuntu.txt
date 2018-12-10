@@ -1,0 +1,98 @@
+--- The end goal is to set up email locally for testing with php.
+--- The means to the end is to utilize gmail's email server to relay our mail for us.
+
+Step 1 : Install Postfix
+
+  sudo apt-get update
+
+Installing mailutils will install postfix too
+
+  sudo apt-get install -y mailutils
+
+On 1st postfix screen, select "<Ok>"
+On "Postfix Configuration" screen, select "Internet Site" and then "<Ok>"
+Next prompt will ask for "System mail name" and use the default then "<Ok>"
+
+
+Step 2 : Configure Postfix
+
+Copy Main Configuration file for backup
+
+  sudo cp /etc/postfix/main.cf /etc/postfix/main.cf.orig
+
+Edit Main Configuration file
+
+  sudo nano /etc/postfix/main.cf
+
+Edit line
+
+  relayhost = [smtp.gmail.com]:587
+
+Add lines
+
+  smtp_sasl_auth_enable = yes
+  smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
+  smtp_sasl_security_options = noanonymous
+  smtp_tls_CAfile = /etc/postfix/cacert.pem
+  smtp_use_tls = yes
+
+Save File with 'Ctrl + x', then 'y', then 'Enter'
+
+
+Step 3 : Create Password and DB Files
+
+Create password file
+
+  sudo nano /etc/postfix/sasl_passwd
+
+Add line, but change the email and password to the credentials for the gmail account you intend to use
+
+  [smtp.gmail.com]:587 username@gmail.com:password
+
+For example :
+
+  [smtp.gmail.com]:587 mr.t.gammage@gmail.com:mysecretpassword
+
+Save File with 'Ctrl + x', then 'y', then 'Enter'
+
+Create a hash database file for Postfix with the postmap command.
+
+  sudo postmap /etc/postfix/sasl_passwd
+
+There should now be a file called sasl_passwd.db in the /etc/postfix/ directory.
+
+  cd /etc/postfix
+
+  ls -la
+
+Confirm file exists
+
+For added security, we will only allow root user to read and write to sasl_passwd and sasl_passwd.db
+
+  sudo chown root:root /etc/postfix/sasl_passwd /etc/postfix/sasl_passwd.db
+
+  sudo chmod 0600 /etc/postfix/sasl_passwd /etc/postfix/sasl_passwd.db
+
+
+Step 4 : Sign Certificate
+
+Create Certificate
+
+  cat /etc/ssl/certs/thawte_Primary_Root_CA.pem | sudo tee -a /etc/postfix/cacert.pem
+
+There should now be a file called cacert.pem in the /etc/postfix/ directory.
+
+  ls -la
+
+Confirm file exists
+
+
+Step 5 : Send Test Mail
+
+Execute command, but change the destination email from test@example.com to desired email account
+
+  echo "Test Email message body" | mail -s "Email test subject" test@example.com
+
+The sending might delay, but you can cofirm errors or success by reading the mail log
+
+  sudo tail /var/log/mail.log

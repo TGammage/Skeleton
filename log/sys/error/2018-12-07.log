@@ -1,0 +1,99 @@
+================================================
+Time : 15:21:52
+HTTP_HOST : dev.skeleton.localdev
+SCRIPT_NAME : /verify_email.php
+REQUEST_URI : /verify_email.php?user_id=5username=TGame&token=9T9tb3qiB5Um3S9Y3mrFrDHUr00MGCjQ
+
+Severity : 8
+
+File : /var/www/Skeleton/lib/php/CheckEmailVerification.php(23)
+
+Message :
+'Undefined index: username'
+
+Trace :
+#0 /var/www/Skeleton/lib/php/CheckEmailVerification.php(23): SystemCore\{closure}(8, 'Undefined index...', '/var/www/Skelet...', 23, Array)
+#1 /var/www/Skeleton/verify_email.php(6): SystemCore\CheckEmailVerification->__construct()
+#2 {main}
+
+================================================
+Time : 15:23:12
+HTTP_HOST : dev.skeleton.localdev
+SCRIPT_NAME : /signup.php
+REQUEST_URI : /signup.php?error=Missing+Session+URL+Key%7CMissing+Session+VAR+Key
+
+Severity : 2
+
+File : /var/www/Skeleton/lib/php/SessionFunctions.php(121)
+
+Message :
+'session_regenerate_id(): Session object destruction failed.  ID: files (path: /var/www/Skeleton/log/session)'
+
+Trace :
+#0 [internal function]: SystemCore\{closure}(2, 'session_regener...', '/var/www/Skelet...', 121, Array)
+#1 /var/www/Skeleton/lib/php/SessionFunctions.php(121): session_regenerate_id(true)
+#2 /var/www/Skeleton/lib/php/Session.php(371): SystemCore\SessionFunctions->session_kill()
+#3 /var/www/Skeleton/lib/php/Session.php(217): SystemCore\Session->session_force_logout()
+#4 /var/www/Skeleton/lib/php/Session.php(48): SystemCore\Session->session_max_quantity()
+#5 /var/www/Skeleton/start.php(71): SystemCore\Session->__construct()
+#6 /var/www/Skeleton/signup.php(2): require('/var/www/Skelet...')
+#7 {main}
+
+================================================
+Time : 15:23:16
+HTTP_HOST : dev.skeleton.localdev
+SCRIPT_NAME : /signup.php
+REQUEST_URI : /signup.php?error=Missing+Session+URL+Key%7CMissing+Session+VAR+Key
+
+Severity : 2
+
+File : /var/www/Skeleton/lib/php/SessionFunctions.php(39)
+
+Message :
+'session_start(): open(/var/www/Skeleton/log/session/sess_2rdpct4s89h8ki2ig6c5he87s6, O_RDWR) failed: Permission denied (13)'
+
+Trace :
+#0 [internal function]: SystemCore\{closure}(2, 'session_start()...', '/var/www/Skelet...', 39, Array)
+#1 /var/www/Skeleton/lib/php/SessionFunctions.php(39): session_start()
+#2 /var/www/Skeleton/lib/php/Session.php(27): SystemCore\SessionFunctions->init()
+#3 /var/www/Skeleton/start.php(71): SystemCore\Session->__construct()
+#4 /var/www/Skeleton/signup.php(2): require('/var/www/Skelet...')
+#5 {main}
+
+================================================
+Time : 15:26:09
+HTTP_HOST : dev.skeleton.localdev
+SCRIPT_NAME : /verify_email.php
+REQUEST_URI : /verify_email.php?user_id=6&user_name=TGame&token=4XHbOdzRP2YfEKAB6QI0oFXlkLzzxXO1
+
+Severity : 8
+
+File : /var/www/Skeleton/lib/php/CheckEmailVerification.php(23)
+
+Message :
+'Undefined index: username'
+
+Trace :
+#0 /var/www/Skeleton/lib/php/CheckEmailVerification.php(23): SystemCore\{closure}(8, 'Undefined index...', '/var/www/Skelet...', 23, Array)
+#1 /var/www/Skeleton/verify_email.php(6): SystemCore\CheckEmailVerification->__construct()
+#2 {main}
+
+================================================
+Time : 15:26:25
+HTTP_HOST : dev.skeleton.localdev
+SCRIPT_NAME : /verify_email.php
+REQUEST_URI : /verify_email.php?user_id=6&user_name=TGame&token=4XHbOdzRP2YfEKAB6QI0oFXlkLzzxXO1
+
+Severity : 8
+
+File : /var/www/Skeleton/lib/php/CheckEmailVerification.php(80)
+
+Message :
+'Undefined index: id'
+
+Trace :
+#0 /var/www/Skeleton/lib/php/CheckEmailVerification.php(80): SystemCore\{closure}(8, 'Undefined index...', '/var/www/Skelet...', 80, Array)
+#1 /var/www/Skeleton/lib/php/CheckEmailVerification.php(27): SystemCore\CheckEmailVerification->vital_confirm()
+#2 /var/www/Skeleton/verify_email.php(6): SystemCore\CheckEmailVerification->__construct()
+#3 {main}
+

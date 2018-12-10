@@ -1,0 +1,92 @@
+================================================
+Time : 00:17:02
+HTTP_HOST : dev.skeleton.localdev
+SCRIPT_NAME : /signup.php
+REQUEST_URI : /signup.php?unique=Ze02CxQKSBGOnPj4
+
+Severity : 8
+
+File : C:\wamp64\www\Skeleton\lib\php\email.php(96)
+
+Message :
+'Undefined variable: error'
+
+Trace :
+#0 C:\wamp64\www\Skeleton\lib\php\email.php(96): SystemCore\{closure}(8, 'Undefined varia...', 'C:\\wamp64\\www\\S...', 96, Array)
+#1 C:\wamp64\www\Skeleton\lib\php\SignupEmail.php(26): SystemCore\email->send()
+#2 C:\wamp64\www\Skeleton\lib\php\CheckSignup.php(179): SystemCore\SignupEmail->__construct()
+#3 C:\wamp64\www\Skeleton\lib\php\CheckSignup.php(157): SystemCore\CheckSignup->new_user_email()
+#4 C:\wamp64\www\Skeleton\lib\php\CheckSignup.php(37): SystemCore\CheckSignup->add_user()
+#5 C:\wamp64\www\Skeleton\signup.php(18): SystemCore\CheckSignup->__construct()
+#6 C:\wamp64\www\Skeleton\signup.php(4): Signup->__construct()
+#7 {main}
+
+================================================
+Time : 01:58:55
+HTTP_HOST : dev.skeleton.localdev
+SCRIPT_NAME : /signup.php
+REQUEST_URI : /signup.php?unique=Ze02CxQKSBGOnPj4
+
+Severity : 8
+
+File : C:\wamp64\www\Skeleton\lib\php\SignupEmail.php(24)
+
+Message :
+'Undefined index: cont'
+
+Trace :
+#0 C:\wamp64\www\Skeleton\lib\php\SignupEmail.php(24): SystemCore\{closure}(8, 'Undefined index...', 'C:\\wamp64\\www\\S...', 24, Array)
+#1 C:\wamp64\www\Skeleton\lib\php\CheckSignup.php(179): SystemCore\SignupEmail->__construct()
+#2 C:\wamp64\www\Skeleton\lib\php\CheckSignup.php(157): SystemCore\CheckSignup->new_user_email()
+#3 C:\wamp64\www\Skeleton\lib\php\CheckSignup.php(37): SystemCore\CheckSignup->add_user()
+#4 C:\wamp64\www\Skeleton\signup.php(18): SystemCore\CheckSignup->__construct()
+#5 C:\wamp64\www\Skeleton\signup.php(4): Signup->__construct()
+#6 {main}
+
+================================================
+Time : 01:59:03
+HTTP_HOST : dev.skeleton.localdev
+SCRIPT_NAME : /signup.php
+REQUEST_URI : /signup.php?unique=Ze02CxQKSBGOnPj4
+
+Severity : 8
+
+File : C:\wamp64\www\Skeleton\lib\php\email.php(424)
+
+Message :
+'Undefined variable: content'
+
+Trace :
+#0 C:\wamp64\www\Skeleton\lib\php\email.php(424): SystemCore\{closure}(8, 'Undefined varia...', 'C:\\wamp64\\www\\S...', 424, Array)
+#1 C:\wamp64\www\Skeleton\lib\php\SignupEmail.php(24): SystemCore\email->attach('C:/wamp64/www/S...')
+#2 C:\wamp64\www\Skeleton\lib\php\CheckSignup.php(179): SystemCore\SignupEmail->__construct()
+#3 C:\wamp64\www\Skeleton\lib\php\CheckSignup.php(157): SystemCore\CheckSignup->new_user_email()
+#4 C:\wamp64\www\Skeleton\lib\php\CheckSignup.php(37): SystemCore\CheckSignup->add_user()
+#5 C:\wamp64\www\Skeleton\signup.php(18): SystemCore\CheckSignup->__construct()
+#6 C:\wamp64\www\Skeleton\signup.php(4): Signup->__construct()
+#7 {main}
+
+================================================
+Time : 02:05:26
+HTTP_HOST : dev.skeleton.localdev
+SCRIPT_NAME : /signup.php
+REQUEST_URI : /signup.php?unique=Ze02CxQKSBGOnPj4
+
+Severity : 8
+
+File : C:\wamp64\www\Skeleton\lib\php\email.php(168)
+
+Message :
+'Use of undefined constant ENCODE_7BIT - assumed 'ENCODE_7BIT''
+
+Trace :
+#0 C:\wamp64\www\Skeleton\lib\php\email.php(168): SystemCore\{closure}(8, 'Use of undefine...', 'C:\\wamp64\\www\\S...', 168, Array)
+#1 C:\wamp64\www\Skeleton\lib\php\email.php(99): SystemCore\email->set_content()
+#2 C:\wamp64\www\Skeleton\lib\php\SignupEmail.php(26): SystemCore\email->send()
+#3 C:\wamp64\www\Skeleton\lib\php\CheckSignup.php(179): SystemCore\SignupEmail->__construct()
+#4 C:\wamp64\www\Skeleton\lib\php\CheckSignup.php(157): SystemCore\CheckSignup->new_user_email()
+#5 C:\wamp64\www\Skeleton\lib\php\CheckSignup.php(37): SystemCore\CheckSignup->add_user()
+#6 C:\wamp64\www\Skeleton\signup.php(18): SystemCore\CheckSignup->__construct()
+#7 C:\wamp64\www\Skeleton\signup.php(4): Signup->__construct()
+#8 {main}
+

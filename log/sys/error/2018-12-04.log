@@ -1,0 +1,39 @@
+================================================
+Time : 17:51:48
+HTTP_HOST : dev.skeleton.localdev
+SCRIPT_NAME : /login.php
+REQUEST_URI : /login.php?unique=SoMugOC0YSv8uw7z
+
+Severity : 8192
+
+File : C:\wamp64\www\Skeleton\login.php(19)
+
+Message :
+'Non-static method SystemCore\CheckLogin::redirect() should not be called statically'
+
+Trace :
+#0 C:\wamp64\www\Skeleton\login.php(19): SystemCore\{closure}(8192, 'Non-static meth...', 'C:\\wamp64\\www\\S...', 19, Array)
+#1 C:\wamp64\www\Skeleton\login.php(4): Login->__construct()
+#2 {main}
+
+================================================
+Time : 17:56:48
+HTTP_HOST : dev.skeleton.localdev
+SCRIPT_NAME : /signup.php
+REQUEST_URI : /signup.php?unique=yXZ5pwADAvQeDKI0
+
+Severity : 8
+
+File : C:\wamp64\www\Skeleton\lib\php\CheckSignup.php(254)
+
+Message :
+'Undefined index: password'
+
+Trace :
+#0 C:\wamp64\www\Skeleton\lib\php\CheckSignup.php(254): SystemCore\{closure}(8, 'Undefined index...', 'C:\\wamp64\\www\\S...', 254, Array)
+#1 C:\wamp64\www\Skeleton\lib\php\CheckSignup.php(161): SystemCore\CheckSignup->new_user_login()
+#2 C:\wamp64\www\Skeleton\lib\php\CheckSignup.php(37): SystemCore\CheckSignup->add_user()
+#3 C:\wamp64\www\Skeleton\signup.php(18): SystemCore\CheckSignup->__construct()
+#4 C:\wamp64\www\Skeleton\signup.php(4): Signup->__construct()
+#5 {main}
+

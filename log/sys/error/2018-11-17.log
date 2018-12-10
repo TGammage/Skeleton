@@ -1,0 +1,146 @@
+================================================
+Time : 02:13:16
+HTTP_HOST : dev.skeleton.localdev
+SCRIPT_NAME : /dev/index.php
+REQUEST_URI : /dev/?debug=true
+
+Severity : 2
+
+File : C:\wamp64\www\Skeleton\lib\php\db.php(72)
+
+Message :
+'mysqli_connect(): (HY000/1045): Access denied for user 'skeleton_system'@'localhost' (using password: YES)'
+
+Trace :
+#0 [internal function]: SystemCore\{closure}(2, 'mysqli_connect(...', 'C:\\wamp64\\www\\S...', 72, Array)
+#1 C:\wamp64\www\Skeleton\lib\php\db.php(72): mysqli_connect('localhost', 'skeleton_system', 'NojeGpLokdSiWnQ...', 'skeleton_main')
+#2 C:\wamp64\www\Skeleton\lib\php\db.php(54): db->connect()
+#3 C:\wamp64\www\Skeleton\lib\php\Session.php(46): db->__construct()
+#4 C:\wamp64\www\Skeleton\start.php(74): SystemCore\Session->__construct()
+#5 C:\wamp64\www\Skeleton\dev\index.php(2): require('C:\\wamp64\\www\\S...')
+#6 {main}
+
+================================================
+Time : 02:22:36
+HTTP_HOST : dev.skeleton.localdev
+SCRIPT_NAME : /dev/index.php
+REQUEST_URI : /dev/?debug=true
+
+Severity : 2
+
+File : C:\wamp64\www\Skeleton\lib\php\db.php(72)
+
+Message :
+'mysqli_connect(): (HY000/1044): Access denied for user 'skeleton_system'@'localhost' to database 'skeleton_main''
+
+Trace :
+#0 [internal function]: SystemCore\{closure}(2, 'mysqli_connect(...', 'C:\\wamp64\\www\\S...', 72, Array)
+#1 C:\wamp64\www\Skeleton\lib\php\db.php(72): mysqli_connect('localhost', 'skeleton_system', 'NojeGpLokdSiWnQ...', 'skeleton_main')
+#2 C:\wamp64\www\Skeleton\lib\php\db.php(54): db->connect()
+#3 C:\wamp64\www\Skeleton\lib\php\Session.php(46): db->__construct()
+#4 C:\wamp64\www\Skeleton\start.php(74): SystemCore\Session->__construct()
+#5 C:\wamp64\www\Skeleton\dev\index.php(2): require('C:\\wamp64\\www\\S...')
+#6 {main}
+
+================================================
+Time : 02:25:20
+HTTP_HOST : dev.skeleton.localdev
+SCRIPT_NAME : /dev/index.php
+REQUEST_URI : /dev/?debug=true
+
+Severity : 2
+
+File : C:\wamp64\www\Skeleton\lib\php\db.php(72)
+
+Message :
+'mysqli_connect(): (HY000/1045): Access denied for user 'skeleton_system'@'localhost' (using password: YES)'
+
+Trace :
+#0 [internal function]: SystemCore\{closure}(2, 'mysqli_connect(...', 'C:\\wamp64\\www\\S...', 72, Array)
+#1 C:\wamp64\www\Skeleton\lib\php\db.php(72): mysqli_connect('localhost', 'skeleton_system', 'NojeGpLokdSiWnQ...', 'skeleton_main')
+#2 C:\wamp64\www\Skeleton\lib\php\db.php(54): db->connect()
+#3 C:\wamp64\www\Skeleton\lib\php\Session.php(46): db->__construct()
+#4 C:\wamp64\www\Skeleton\start.php(74): SystemCore\Session->__construct()
+#5 C:\wamp64\www\Skeleton\dev\index.php(2): require('C:\\wamp64\\www\\S...')
+#6 {main}
+
+================================================
+Time : 05:44:07
+HTTP_HOST : dev.skeleton.localdev
+SCRIPT_NAME : /dev/index.php
+REQUEST_URI : /dev/?debug=true
+
+Severity : 1
+
+File : C:\wamp64\www\Skeleton\lib\php\Session.php(47)
+
+Message :
+'Autoloader could not find file.'
+
+Trace :
+#0 [internal function]: {closure}('SystemCore\\PDO')
+#1 C:\wamp64\www\Skeleton\lib\php\Session.php(47): spl_autoload_call('SystemCore\\PDO')
+#2 C:\wamp64\www\Skeleton\start.php(74): SystemCore\Session->__construct()
+#3 C:\wamp64\www\Skeleton\dev\index.php(2): require('C:\\wamp64\\www\\S...')
+#4 {main}
+
+================================================
+Time : 05:45:22
+HTTP_HOST : dev.skeleton.localdev
+SCRIPT_NAME : /dev/index.php
+REQUEST_URI : /dev/?debug=true
+
+Severity : 2
+
+File : C:\wamp64\www\Skeleton\lib\php\db.php(106)
+
+Message :
+'PDOStatement::fetchAll(): SQLSTATE[HY000]: General error: PDO::FETCH_LAZY can't be used with PDOStatement::fetchAll()'
+
+Trace :
+#0 [internal function]: SystemCore\{closure}(2, 'PDOStatement::f...', 'C:\\wamp64\\www\\S...', 106, Array)
+#1 C:\wamp64\www\Skeleton\lib\php\db.php(106): PDOStatement->fetchAll(1)
+#2 C:\wamp64\www\Skeleton\lib\php\Session.php(48): db->query('SELECT * FROM `...', Array, 1)
+#3 C:\wamp64\www\Skeleton\start.php(74): SystemCore\Session->__construct()
+#4 C:\wamp64\www\Skeleton\dev\index.php(2): require('C:\\wamp64\\www\\S...')
+#5 {main}
+
+================================================
+Time : 06:25:08
+HTTP_HOST : dev.skeleton.localdev
+SCRIPT_NAME : /dev/index.php
+REQUEST_URI : /dev/?debug=true
+
+Severity : 8192
+
+File : C:\wamp64\www\Skeleton\lib\php\Session.php(48)
+
+Message :
+'Non-static method random::string() should not be called statically'
+
+Trace :
+#0 C:\wamp64\www\Skeleton\lib\php\Session.php(48): SystemCore\{closure}(8192, 'Non-static meth...', 'C:\\wamp64\\www\\S...', 48, Array)
+#1 C:\wamp64\www\Skeleton\start.php(74): SystemCore\Session->__construct()
+#2 C:\wamp64\www\Skeleton\dev\index.php(2): require('C:\\wamp64\\www\\S...')
+#3 {main}
+
+================================================
+Time : 06:28:47
+HTTP_HOST : dev.skeleton.localdev
+SCRIPT_NAME : /dev/index.php
+REQUEST_URI : /dev/?debug=true
+
+Severity : 8
+
+File : C:\wamp64\www\Skeleton\lib\php\random.php(40)
+
+Message :
+'Undefined variable: len'
+
+Trace :
+#0 C:\wamp64\www\Skeleton\lib\php\random.php(40): SystemCore\{closure}(8, 'Undefined varia...', 'C:\\wamp64\\www\\S...', 40, Array)
+#1 C:\wamp64\www\Skeleton\lib\php\Session.php(48): random::string()
+#2 C:\wamp64\www\Skeleton\start.php(74): SystemCore\Session->__construct()
+#3 C:\wamp64\www\Skeleton\dev\index.php(2): require('C:\\wamp64\\www\\S...')
+#4 {main}
+

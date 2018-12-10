@@ -1,0 +1,61 @@
+================================================
+Time : 23:33:20
+HTTP_HOST : dev.skeleton.localdev
+SCRIPT_NAME : /dev/index.php
+REQUEST_URI : /dev/?debug=true
+
+Severity : 8
+
+File : C:\wamp64\www\Skeleton\lib\php\db.php(52)
+
+Message :
+'Undefined offset: 0'
+
+Trace :
+#0 C:\wamp64\www\Skeleton\lib\php\db.php(52): SystemCore\{closure}(8, 'Undefined offse...', 'C:\\wamp64\\www\\S...', 52, Array)
+#1 C:\wamp64\www\Skeleton\lib\php\Session.php(43): db->__construct()
+#2 C:\wamp64\www\Skeleton\start.php(74): SystemCore\Session->__construct()
+#3 C:\wamp64\www\Skeleton\dev\index.php(2): require('C:\\wamp64\\www\\S...')
+#4 {main}
+
+================================================
+Time : 23:33:43
+HTTP_HOST : dev.skeleton.localdev
+SCRIPT_NAME : /dev/index.php
+REQUEST_URI : /dev/?debug=true
+
+Severity : 8
+
+File : C:\wamp64\www\Skeleton\lib\php\db.php(52)
+
+Message :
+'Undefined offset: 0'
+
+Trace :
+#0 C:\wamp64\www\Skeleton\lib\php\db.php(52): SystemCore\{closure}(8, 'Undefined offse...', 'C:\\wamp64\\www\\S...', 52, Array)
+#1 C:\wamp64\www\Skeleton\lib\php\Session.php(43): db->__construct()
+#2 C:\wamp64\www\Skeleton\start.php(74): SystemCore\Session->__construct()
+#3 C:\wamp64\www\Skeleton\dev\index.php(2): require('C:\\wamp64\\www\\S...')
+#4 {main}
+
+================================================
+Time : 23:53:14
+HTTP_HOST : dev.skeleton.localdev
+SCRIPT_NAME : /dev/index.php
+REQUEST_URI : /dev/?debug=true
+
+Severity : 8
+
+File : C:\wamp64\www\Skeleton\lib\php\db.php(76)
+
+Message :
+'Undefined variable: conn'
+
+Trace :
+#0 C:\wamp64\www\Skeleton\lib\php\db.php(76): SystemCore\{closure}(8, 'Undefined varia...', 'C:\\wamp64\\www\\S...', 76, Array)
+#1 C:\wamp64\www\Skeleton\lib\php\db.php(54): db->connect()
+#2 C:\wamp64\www\Skeleton\lib\php\Session.php(43): db->__construct()
+#3 C:\wamp64\www\Skeleton\start.php(74): SystemCore\Session->__construct()
+#4 C:\wamp64\www\Skeleton\dev\index.php(2): require('C:\\wamp64\\www\\S...')
+#5 {main}
+

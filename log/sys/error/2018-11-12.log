@@ -1,0 +1,164 @@
+================================================
+Time : 10:31:24
+
+HTTP_HOST : dev.skeleton.localdev
+SCRIPT_NAME : /dev/index.php
+REQUEST_URI : /dev/?debug=true
+
+Severity : 2
+
+File : C:\wamp64\www\Skeleton\lib\php\autoloader.php(27)
+
+Message :
+'require_once(C:/wamp64/www/Skeleton\lib\php\DB.php): failed to open stream: No such file or directory'
+
+Trace :
+#0 C:\wamp64\www\Skeleton\lib\php\autoloader.php(27): SystemCore\{closure}(2, 'require_once(C:...', 'C:\\wamp64\\www\\S...', 27, Array)
+#1 C:\wamp64\www\Skeleton\lib\php\autoloader.php(27): require_once()
+#2 [internal function]: {closure}('DB')
+#3 C:\wamp64\www\Skeleton\start.php(84): spl_autoload_call('DB')
+#4 C:\wamp64\www\Skeleton\dev\index.php(2): require('C:\\wamp64\\www\\S...')
+#5 {main}
+
+================================================
+Time : 23:20:50
+
+HTTP_HOST : dev.skeleton.localdev
+SCRIPT_NAME : /dev/index.php
+REQUEST_URI : /dev/?debug=true
+
+Severity : 2
+
+File : C:\wamp64\www\Skeleton\lib\php\autoloader.php(27)
+
+Message :
+'require_once(C:/wamp64/www/Skeleton\lib\php\DB.php): failed to open stream: No such file or directory'
+
+Trace :
+#0 C:\wamp64\www\Skeleton\lib\php\autoloader.php(27): SystemCore\{closure}(2, 'require_once(C:...', 'C:\\wamp64\\www\\S...', 27, Array)
+#1 C:\wamp64\www\Skeleton\lib\php\autoloader.php(27): require_once()
+#2 [internal function]: {closure}('DB')
+#3 C:\wamp64\www\Skeleton\start.php(84): spl_autoload_call('DB')
+#4 C:\wamp64\www\Skeleton\dev\index.php(2): require('C:\\wamp64\\www\\S...')
+#5 {main}
+
+================================================
+Time : 23:23:48
+
+HTTP_HOST : dev.skeleton.localdev
+SCRIPT_NAME : /dev/index.php
+REQUEST_URI : /dev/?debug=true
+
+Severity : Autoloader could not find file.
+
+File : not given(unknown)
+
+Message :
+''
+
+Trace :
+#0 [internal function]: {closure}('DB')
+#1 C:\wamp64\www\Skeleton\start.php(84): spl_autoload_call('DB')
+#2 C:\wamp64\www\Skeleton\dev\index.php(2): require('C:\\wamp64\\www\\S...')
+#3 {main}
+
+================================================
+Time : 23:30:11
+
+HTTP_HOST : dev.skeleton.localdev
+SCRIPT_NAME : /dev/index.php
+REQUEST_URI : /dev/?debug=true
+
+Severity : 2
+
+File : C:\wamp64\www\Skeleton\lib\php\autoloader.php(36)
+
+Message :
+'Illegal string offset 'line''
+
+Trace :
+#0 C:\wamp64\www\Skeleton\lib\php\autoloader.php(36): SystemCore\{closure}(2, 'Illegal string ...', 'C:\\wamp64\\www\\S...', 36, Array)
+#1 [internal function]: {closure}('DB')
+#2 C:\wamp64\www\Skeleton\start.php(84): spl_autoload_call('DB')
+#3 C:\wamp64\www\Skeleton\dev\index.php(2): require('C:\\wamp64\\www\\S...')
+#4 {main}
+
+================================================
+Time : 23:30:36
+
+HTTP_HOST : dev.skeleton.localdev
+SCRIPT_NAME : /dev/index.php
+REQUEST_URI : /dev/?debug=true
+
+Severity : 1
+
+File : C:\wamp64\www\Skeleton\start.php(84)
+
+Message :
+'Autoloader could not find file.'
+
+Trace :
+#0 [internal function]: {closure}('DB')
+#1 C:\wamp64\www\Skeleton\start.php(84): spl_autoload_call('DB')
+#2 C:\wamp64\www\Skeleton\dev\index.php(2): require('C:\\wamp64\\www\\S...')
+#3 {main}
+
+================================================
+Time : 23:48:33
+
+HTTP_HOST : NO HOST (SYSTEM_REQUEST)
+SCRIPT_NAME : /dev/index.php
+REQUEST_URI : /dev/?debug=true
+
+Severity : 1
+
+File : C:\wamp64\www\Skeleton\start.php(84)
+
+Message :
+'Autoloader could not find file.'
+
+Trace :
+#0 [internal function]: {closure}('DB')
+#1 C:\wamp64\www\Skeleton\start.php(84): spl_autoload_call('DB')
+#2 C:\wamp64\www\Skeleton\dev\index.php(2): require('C:\\wamp64\\www\\S...')
+#3 {main}
+
+================================================
+Time : 23:48:51
+
+HTTP_HOST : dev.skeleton.localdev
+SCRIPT_NAME : /dev/index.php
+REQUEST_URI : /dev/?debug=true
+
+Severity : 1
+
+File : C:\wamp64\www\Skeleton\start.php(84)
+
+Message :
+'Autoloader could not find file.'
+
+Trace :
+#0 [internal function]: {closure}('DB')
+#1 C:\wamp64\www\Skeleton\start.php(84): spl_autoload_call('DB')
+#2 C:\wamp64\www\Skeleton\dev\index.php(2): require('C:\\wamp64\\www\\S...')
+#3 {main}
+
+================================================
+Time : 23:49:05
+HTTP_HOST : dev.skeleton.localdev
+SCRIPT_NAME : /dev/index.php
+REQUEST_URI : /dev/?debug=true
+
+Severity : 1
+
+File : C:\wamp64\www\Skeleton\start.php(84)
+
+Message :
+'Autoloader could not find file.'
+
+Trace :
+#0 [internal function]: {closure}('DB')
+#1 C:\wamp64\www\Skeleton\start.php(84): spl_autoload_call('DB')
+#2 C:\wamp64\www\Skeleton\dev\index.php(2): require('C:\\wamp64\\www\\S...')
+#3 {main}
+

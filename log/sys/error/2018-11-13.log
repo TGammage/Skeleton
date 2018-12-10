@@ -1,0 +1,19 @@
+================================================
+Time : 16:32:53
+HTTP_HOST : dev.skeleton.localdev
+SCRIPT_NAME : /dev/index.php
+REQUEST_URI : /dev/?debug=true
+
+Severity : 8
+
+File : C:\wamp64\www\Skeleton\lib\php\Session.php(15)
+
+Message :
+'Undefined variable: __class__'
+
+Trace :
+#0 C:\wamp64\www\Skeleton\lib\php\Session.php(15): SystemCore\{closure}(8, 'Undefined varia...', 'C:\\wamp64\\www\\S...', 15, Array)
+#1 C:\wamp64\www\Skeleton\start.php(74): SystemCore\Session->__construct()
+#2 C:\wamp64\www\Skeleton\dev\index.php(2): require('C:\\wamp64\\www\\S...')
+#3 {main}
+

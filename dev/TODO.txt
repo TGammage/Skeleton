@@ -1,0 +1,16 @@
+Apache
+	- Clean up verfiy email redirects
+
+Password Recovery
+	- Front Side
+	- Back Side
+	- Email System
+	
+Frame
+	- Add function to output raw js or css
+	- Can use this to make email HTML output
+
+Tick
+	- Divide actions based off minute 
+	- DB clean up
+	- DB backup
