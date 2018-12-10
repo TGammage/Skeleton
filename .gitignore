@@ -1,7 +1,0 @@
-# Ignored Files #
-*.gitignore.*
-
-# Logs #
-
-log/session/*
-log/sys/*
