@@ -51,14 +51,9 @@ class CheckEmailVerification
             self::fail( 'Missing token variable' );
         }
 
-        if( !isset( $_GET['user_name'] ) )
+        if( !isset( $_GET['code'] ) )
         {
             self::fail( 'Missing username' );
-        }
-
-        if( !isset( $_GET['user_id'] ) )
-        {
-            self::fail( 'Missing user ID' );
         }
     }
 
@@ -75,28 +70,23 @@ class CheckEmailVerification
         if( !$this->success )
             return;
         
-        if( !preg_match( $GLOBALS['conf']->regex['username'], $_GET['user_name'] ) )
-        {
-            self::fail( 'Bad username format' );
-        }
- 
-        if( !preg_match( '/^\d{1,11}$/', $_GET['user_id'] ) )
-        {
-            self::fail( 'Bad id format' );
-        }
- 
         if( !preg_match( '/^[\d|\w]{32}$/', $_GET['token'] ) )
         {
             self::fail( 'Bad token format' );
         }
- 
+
+        if( !preg_match( '/^[\d|\w]{32}$/', $_GET['code'] ) )
+        {
+            self::fail( 'Bad code format' );
+        }
+
         if( !$this->success )
         return;
        
-        // Get info from member database for identity check
-        $query = "SELECT `email`, `email_verified` FROM `member` WHERE `id` = ? AND `username` = ? LIMIT 1";
+        // Get info from tmp database for identity check
+        $query = "SELECT `email`,`email_code`,`expiration`  FROM `" . $GLOBALS['conf']->db['tmp'] . "`.`email_verify` WHERE `id` = ? LIMIT 1";
 
-        $param = array( $_GET['user_id'], $_GET['user_name'] );
+        $param = array( $_GET['token'] );
 
         $result = $this->db->query( $query, $param, \PDO::FETCH_ASSOC, true );
 
@@ -104,27 +94,6 @@ class CheckEmailVerification
         if( empty( $result ) )
         {
             self::fail( 'Member does not exist on the database' );
-            return;
-        }
-        // Email verified
-        elseif( $result['email_verified'] == 1 )
-        {
-            self::fail( 'Email Already Verified' );
-            return;
-        }
-
-        // Set Email Address
-        $this->email = $result['email'];
-
-        // Compare client supplied code to code in database, make sure code has not expired
-        $query = "SELECT `email_code`, `expiration` FROM `" . $GLOBALS['conf']->db['tmp'] . "`.`email_verify` WHERE `email` = '" . $this->email . "' LIMIT 1";
-
-        $result = $this->db->query( $query, null, \PDO::FETCH_ASSOC, true );
-
-        // No code found
-        if( empty( $result ) )
-        {
-            self::fail( 'Email Verification Code expired' );
             return;
         }
 
@@ -137,11 +106,25 @@ class CheckEmailVerification
             return;
         }
 
+        $query = "SELECT `email_verified` FROM `member` WHERE `email` = ? LIMIT 1";
+
+        $verified = $this->db->query( $query, array( $result['email'] ), \PDO::FETCH_NUM, true );
+
+        // Email already verified
+        if( $verified[0] == 1 )
+        {
+            self::fail( 'Email Already Verified' );
+            return;
+        }
+
         // Code Mismatch
-        if( $result['email_code'] !== $_GET['token'] )
+        if( $result['email_code'] !== $_GET['code'] )
         {
             self::fail( 'Token Mismatch' );
         }
+
+        // Set Email Address
+        $this->email = $result['email'];
     }
 
     /**
@@ -157,9 +140,9 @@ class CheckEmailVerification
         if( !$this->success )
         return;
        
-        $query = "UPDATE `member` SET `email_verified` = 1 WHERE `id` = ? AND `username` = ? LIMIT 1";
+        $query = "UPDATE `member` SET `email_verified` = 1 WHERE `email` = ? LIMIT 1";
 
-        $param = array( $_GET['user_id'], $_GET['user_name'] );
+        $param = array( $this->email );
 
         $count = $this->db->query( $query, $param );
 
@@ -169,9 +152,9 @@ class CheckEmailVerification
             return;
         }
         
-        $query = "DELETE FROM `" . $GLOBALS['conf']->db['tmp'] . "`.`email_verify` WHERE `email` = '" . $this->email . "' LIMIT 1";
+        $query = "DELETE FROM `" . $GLOBALS['conf']->db['tmp'] . "`.`email_verify` WHERE `email` = ?";
 
-        $this->db->query( $query );
+        $this->db->query( $query, array( $this->email ) );
    }
 
     /**

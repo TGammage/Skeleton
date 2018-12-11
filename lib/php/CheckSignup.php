@@ -13,6 +13,9 @@ class CheckSignup extends check
 	/** @var string Verification code for email */
 	private	$verification_code = null;
 
+	/** @var string Token (unique identifier for email verification) */
+	private	$token = null;
+
 	/** @var string Return variables sent back to login page */
 	private	$return_data = '';
 
@@ -151,9 +154,6 @@ class CheckSignup extends check
 	private function add_member()
 	{
 		self::new_member_database_insertions();
-
-		self::new_member_email();
-
 		self::new_member_login();
 	}
 
@@ -174,8 +174,6 @@ class CheckSignup extends check
 		$hasher = new PepperedPassword;
 
 		$password = $hasher->hash( $_POST['access'] );
-
-		$this->verification_code = \random::string( 32 );
 
 		// Add new member to the member database
 		$query = "INSERT INTO `member` ( `username`, `email`, `access` ) VALUES ( ?, ?, ? );";
@@ -210,20 +208,13 @@ class CheckSignup extends check
 			return;
 		}
 
-		// Add email verification code to email verify list
-		$tomorrow = date( 'Y-m-d H:i:s', $_SERVER['REQUEST_TIME'] + ( 60 * 60 * 24 ) );
-
-		$query = "INSERT INTO `" . $GLOBALS['conf']->db['tmp'] . "`.`email_verify` ( `expiration`, `email_code`, `email` ) VALUES ( '$tomorrow', '" . $this->verification_code . "', ? );";
-
-		$param = array( $_POST['email'] );
-
-		$count = $this->db->query( $query, $param );
-
-		if( $count != 1 )
+		// New member email verification
+		if( !new SignupEmail( $_POST['email'], $_POST['username'] ) )
 		{
-			parent::fail( "Failed to create email verification in database" );
+			parent::fail( 'Could not generate new email for verification' );
 			return;
 		}
+
 		// Unlock new member in member database
 		if( !$this->success )
 			return;
@@ -236,23 +227,6 @@ class CheckSignup extends check
 		{
 			parent::fail( "Failed to unlock new member" );
 		}
-	}
-
-	/**
-	*		new_member_email()
-	*
-	*		@purpose
-	*			Emails verification code to new member
-	*
-	*		@return void
-	*/
-	private function new_member_email()
-	{
-		// Skip on prior failure
-		if( !$this->success )
-			return;
-
-		new SignupEmail( $this->user_ID, $this->verification_code );
 	}
 
 	/**

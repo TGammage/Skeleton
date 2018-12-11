@@ -29,13 +29,13 @@ set_error_handler( function( $severity, $message, $file, $line )
 class ErrorHandler extends \Exception
 {
 	/**
-	*		Constructor
-	*
-	*		@param int		severity	Error Severity
-	*		@param string	message		Error Message
-	*		@param string	file		File Causing Error
-	*		@param int		line		Line Causing Error
-	*/
+	 * Constructor
+	 *
+	 * @param int		severity	Error Severity
+	 * @param string	message		Error Message
+	 * @param string	file		File Causing Error
+	 * @param int		line		Line Causing Error
+	 */
 	public function __construct( $severity = 0, $message = '', $file = 'not given', $line = 'unknown' )
 	{
 		parent::__construct( $message );

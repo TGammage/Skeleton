@@ -107,13 +107,15 @@ USE `skeleton_dev_tmp`;
 --  PRIMARY		: id
 --
 CREATE TABLE `account_recovery` (
+  `id` varchar(32) NOT NULL,
   `email` varchar(255) NOT NULL,
   `email_code` varchar(8) NOT NULL,
-  `expiration` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `expiration` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 ALTER TABLE `account_recovery`
-  ADD PRIMARY KEY (`email`);
+  ADD UNIQUE KEY `unique_email` (`email`);
 
 --
 --  Table : skeleton_dev_tmp.email_verify
@@ -121,11 +123,15 @@ ALTER TABLE `account_recovery`
 --  PRIMARY		: id
 --
 CREATE TABLE `email_verify` (
+  `id` varchar(32) NOT NULL,
   `email` varchar(255) NOT NULL,
   `email_code` varchar(32) NOT NULL,
   `expiration` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`email`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+ALTER TABLE `email_verify`
+  ADD UNIQUE KEY `unique_email` (`email`);
 
 --
 --  Table : skeleton_dev_tmp.ip_banned

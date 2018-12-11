@@ -15,9 +15,7 @@ class AccountRecovery
 	{
 		if( $_SERVER['REQUEST_METHOD'] === 'POST' )
 		{
-			$system = new SystemCore\CheckAccountRecovery;
-			$system->redirect();
-
+            new SystemCore\CheckAccountRecovery;
 			return;
 		}
 
@@ -93,7 +91,7 @@ class AccountRecovery
             <p>The email supplied was not found in our database. Please verfiy the spelling is correct and resubmit the email address.</p>";
             
                 echo "
-            <form method='POST' action='?unique={$_SESSION['url_key']['account_recovery']}'>
+            <form method='POST' action='?step=email_submission&unique={$_SESSION['url_key']['account_recovery']}'>
                 <input type='hidden' name='unique' value='{$_SESSION['var_key']['account_recovery']}' />
                 <input type='text' name='email' placeholder='Email' autofocus /><br><br>
                 <input type='submit' value='Recover'/>
@@ -102,6 +100,16 @@ class AccountRecovery
             break;
 
             case 'code_entry':
+
+                if( !isset( $_GET['token'] ) )
+                {
+                    header( "Location:/account_recovery.php" );
+                }
+
+                if( !preg_match( '/^(\w|\d){32}$/', $_GET['token'] ) )
+                {
+                    header( "Location:/account_recovery.php" );
+                }
 
                 $_SESSION['url_key']['account_recovery'] = random::string( 32 );
                 $_SESSION['var_key']['account_recovery'] = random::string( 32 );
@@ -113,6 +121,7 @@ class AccountRecovery
                 echo "
             <form method='POST' action='?step=code_entry&unique={$_SESSION['url_key']['account_recovery']}'>
                 <input type='hidden' name='unique' value='{$_SESSION['var_key']['account_recovery']}' />
+                <input type='hidden' name='token' value='{$_GET['token']}' />
                 <input type='text' name='recovery_code' placeholder='Recovery Code' autofocus /><br><br>
                 <input type='submit' value='Recover'/>
             </form>";
@@ -120,6 +129,23 @@ class AccountRecovery
             break;
 
             case 'create_new_password':
+
+                if(
+                    !isset( $_SESSION['url_key']['password_recovery'] )
+                ||  !isset( $_GET['unique'] )
+                ||  !isset( $_GET['token'] )
+                )
+                {
+                    header( "Location:account_recovery.php" );
+                }
+
+                if(
+                    $_SESSION['url_key']['password_recovery'] !== $_GET['unique']
+                ||  !preg_match( '/^(\w|\d){32}$/', $_GET['token'] )
+                )
+                {
+                    header( "Location:account_recovery.php" );
+                }
 
                 $_SESSION['url_key']['account_recovery'] = random::string( 32 );
                 $_SESSION['var_key']['account_recovery'] = random::string( 32 );
@@ -131,7 +157,7 @@ class AccountRecovery
                 echo "
             <form method='POST' action='?step=password_update&unique={$_SESSION['url_key']['account_recovery']}'>
                 <input type='hidden' name='unique' value='{$_SESSION['var_key']['account_recovery']}' />
-                <input type='hidden' name='email' value='{$_SESSION['var_key']['account_recovery']}' />
+                <input type='hidden' name='token' value='{$_GET['token']}' />
                 <input type='password' name='access' placeholder='Password' autofocus /><br>
                 <input type='password' name='confirm_access' placeholder='Confirm Password' /><br><br>
                 <input type='submit' value='Create'/>
