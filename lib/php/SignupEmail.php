@@ -30,7 +30,7 @@ class SignupEmail extends email
 
 		parent::from( "signup@" . $GLOBALS['conf']->base_domain, "System at " . $GLOBALS['conf']->site_title );
 
-		parent::subject( "Welcome " . $_POST['username'] );
+		parent::subject( "Welcome " . $username );
 
 		parent::message( self::HTML(), parent::MIME_HTML );
 

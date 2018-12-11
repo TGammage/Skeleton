@@ -3,6 +3,5 @@
 
 # Logs #
 
-log/session/*
-log/sys/*
 *.log
+log/*

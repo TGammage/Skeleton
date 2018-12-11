@@ -2,10 +2,20 @@ Apache
 	- Clean up verfiy email redirects
 
 Password Recovery
-	- Front Side
-	- Back Side
-	- Email System
-	
+	- Try to run things in an erroneous manner to see behaviors and bugs
+	- Check for any security breaches if available
+	- Consolidate and condense code if possible,
+		you used copy and paste a few times....
+
+Update profile info
+	- Names
+	- Password
+	- email
+
+Add Location updater
+
+Add Clearance capabilities
+
 Frame
 	- Add function to output raw js or css
 	- Can use this to make email HTML output

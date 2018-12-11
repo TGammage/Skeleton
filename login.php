@@ -79,7 +79,8 @@ class Login
 	<input type='text' name='identify' placeholder='$placeholder' value='$prefill'$autofocus_identify /><br>
 	<input type='password' name='access' placeholder='Password'$autofocus_access /><br>
 	<input type='submit' value='Login'/>
-</form>";
+</form>
+<a href='account_recovery.php'>Forgot My Password</a>";
 		}
 
 		$PAGE->end();

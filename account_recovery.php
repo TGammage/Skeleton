@@ -83,6 +83,8 @@ class AccountRecovery
 
             case 'email_unknown':
 
+                $value = isset( $_GET['email'] ) ? urldecode( $_GET['email'] ) : '';
+
                 $_SESSION['url_key']['account_recovery'] = random::string( 32 );
                 $_SESSION['var_key']['account_recovery'] = random::string( 32 );
 
@@ -93,7 +95,7 @@ class AccountRecovery
                 echo "
             <form method='POST' action='?step=email_submission&unique={$_SESSION['url_key']['account_recovery']}'>
                 <input type='hidden' name='unique' value='{$_SESSION['var_key']['account_recovery']}' />
-                <input type='text' name='email' placeholder='Email' autofocus /><br><br>
+                <input type='text' name='email' placeholder='Email' value='$value' autofocus /><br><br>
                 <input type='submit' value='Recover'/>
             </form>";
 
@@ -139,8 +141,11 @@ class AccountRecovery
                     header( "Location:account_recovery.php" );
                 }
 
+                $unique = substr( $_GET['unique'], 0, 16 );
+                $code   = substr( $_GET['unique'], 16 );
+
                 if(
-                    $_SESSION['url_key']['password_recovery'] !== $_GET['unique']
+                    $_SESSION['url_key']['password_recovery'] !== $unique
                 ||  !preg_match( '/^(\w|\d){32}$/', $_GET['token'] )
                 )
                 {
@@ -158,6 +163,7 @@ class AccountRecovery
             <form method='POST' action='?step=password_update&unique={$_SESSION['url_key']['account_recovery']}'>
                 <input type='hidden' name='unique' value='{$_SESSION['var_key']['account_recovery']}' />
                 <input type='hidden' name='token' value='{$_GET['token']}' />
+                <input type='hidden' name='recovery_code' value='$code' />
                 <input type='password' name='access' placeholder='Password' autofocus /><br>
                 <input type='password' name='confirm_access' placeholder='Confirm Password' /><br><br>
                 <input type='submit' value='Create'/>

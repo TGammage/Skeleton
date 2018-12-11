@@ -14,6 +14,7 @@ class CheckAccountRecovery extends check
         if( !isset( $_GET['step'] ) )
         {
             header( "Location:/account_recovery.php" );
+            exit();
         }
 
         parent::key_check( 'account_recovery' );
@@ -21,6 +22,7 @@ class CheckAccountRecovery extends check
         if( !$this->success )
         {
             header( "Location:/account_recovery.php" );
+            exit();
         }
         
         switch( $_GET['step'] )
@@ -60,7 +62,10 @@ class CheckAccountRecovery extends check
 
 		if( !is_email( $_POST['email'] ) )
 		{
-            header( "Location:/account_recovery.php?request=email_unknown" );
+            $address = urlencode( $_POST['email'] );
+
+            header( "Location:/account_recovery.php?request=email_unknown&email=$address" );
+            exit();
         }
 
         // Email search on database
@@ -74,12 +79,18 @@ class CheckAccountRecovery extends check
 
         if( empty( $result ) )
         {
-            header( "Location:/account_recovery.php?request=email_unknown" );
+            $address = urlencode( $_POST['email'] );
+
+            header( "Location:/account_recovery.php?request=email_unknown&email=$address" );
+            exit();
         }
         elseif( $result['email_verified'] == 0 )
         {
             // Email has not been verified, send new email verification code
             new SignupEmail( $_POST['email'], $result['username'] );
+
+            header( "Location:/account_recovery.php?error=email+unverified" );
+            exit();
         } else {
             // Send Account Recovery Email
             $email = new AccountRecoveryEmail( $_POST['email'], $result['username'] );
@@ -87,6 +98,7 @@ class CheckAccountRecovery extends check
             if( !$email->success )
             {
                 header( "Location:/account_recovery.php" );
+                exit();
             }
 
             header( "Location:/account_recovery.php?request=code_entry&token=" . $email->token );
@@ -106,6 +118,7 @@ class CheckAccountRecovery extends check
         if( !isset( $_POST['token'] ) || !isset( $_POST['recovery_code'] ) )
         {
             header( "Location:account_recovery.php" );
+            exit();
         }
 
         if(
@@ -114,6 +127,7 @@ class CheckAccountRecovery extends check
         )
         {
             header( "Location:account_recovery.php" );
+            exit();
         }
 
         $db = new \db( 'tmp' );
@@ -125,6 +139,7 @@ class CheckAccountRecovery extends check
         if( empty( $result ) )
         {
             header( "Location:account_recovery.php" );
+            exit();
         }
 
         // Determine if code expired
@@ -133,18 +148,20 @@ class CheckAccountRecovery extends check
         if( $_SERVER['REQUEST_TIME'] > $expiration->getTimestamp() )
         {
             header( "Location:account_recovery.php?error=code+expired" );
+            exit();
         }
 
         // Code match
         if( $_POST['recovery_code'] !== $result['email_code'] )
         {
-            header( "Location:account_recovery.php?request=code_entry&token={$_POST['token']}" );
+            header( "Location:account_recovery.php?error=bad+code&request=code_entry&token={$_POST['token']}" );
+            exit();
         }
 
         // Move on to new password entry
         $_SESSION['url_key']['password_recovery'] = \random::string( 16 );
 
-        header( "Location:account_recovery.php?request=create_new_password&token={$_POST['token']}&unique={$_SESSION['url_key']['password_recovery']}" );
+        header( "Location:account_recovery.php?request=create_new_password&token={$_POST['token']}&unique={$_SESSION['url_key']['password_recovery']}{$result['email_code']}" );
     }
 
     /**
@@ -158,12 +175,12 @@ class CheckAccountRecovery extends check
      */
     private function update_password()
     {
-        // print __class__ . "::" . __function__ . "()<br>";exit();
         // Empty checks
         if( 
             !isset( $_POST['token'] )
         ||  !isset( $_GET['unique'] )
         ||  !isset( $_POST['unique'] )
+        ||  !isset( $_POST['recovery_code'] )
         ||  !isset( $_POST['access'] )
         ||  !isset( $_POST['confirm_access'] )
         ||  !isset( $_SESSION['url_key']['account_recovery'] )
@@ -171,6 +188,7 @@ class CheckAccountRecovery extends check
         )
        {
             header( "Location:account_recovery.php" );
+            exit();
         }
 
         // Key Check
@@ -188,25 +206,34 @@ class CheckAccountRecovery extends check
         if( $_POST['access'] !== $_POST['confirm_access'] )
         {
             $_SESSION['url_key']['password_recovery'] = \random::string( 16 );
+
             header( "Location:account_recovery.php?error=password+mismatch&request=create_new_password&token={$_POST['token']}&unique={$_SESSION['url_key']['password_recovery']}" );
+            exit();
         }
 
         // Password format check
         if( !preg_match( $GLOBALS['conf']->regex['password'], $_POST['access'] ) )
         {
             $_SESSION['url_key']['password_recovery'] = \random::string( 16 );
+
             header( "Location:account_recovery.php?error=password+bad+format&request=create_new_password&token={$_POST['token']}&unique={$_SESSION['url_key']['password_recovery']}" );
+            exit();
         }
 
         $db = new \db( 'tmp' );
 
-        $query = "SELECT `email`, `expiration` FROM `account_recovery` WHERE `id` = ? LIMIT 1";
+        $query = "SELECT `email`, `email_code`, `expiration` FROM `account_recovery` WHERE `id` = ? LIMIT 1";
 
         $result = $db->query( $query, array( $_POST['token'] ), \PDO::FETCH_ASSOC, true );
 
         if( empty( $result ) )
         {
             header( "Location:account_recovery.php" );
+        }
+        elseif( $result['email_code'] !==$_POST['recovery_code'] )
+        {
+            header( "Location:account_recovery.php" );
+            exit();
         }
 
         // Determine if code expired
@@ -215,6 +242,7 @@ class CheckAccountRecovery extends check
         if( $_SERVER['REQUEST_TIME'] > $expiration->getTimestamp() )
         {
             header( "Location:account_recovery.php?error=code+expired" );
+            exit();
         }
 
         // Update new password in the member database
@@ -232,11 +260,12 @@ class CheckAccountRecovery extends check
 		if( $count != 1 )
 		{
             header( "Location:account_recovery?error=password+update" );
+            exit();
         }
 
         $db->query( "DELETE FROM `account_recovery` WHERE `email` = ?", array( $result['email'] ) );
 
-        header( "Location:login.php?message=account_recovery_success" );
+        header( "Location:login.php?message=account+recovery+success" );
     }
 }
 
