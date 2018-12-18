@@ -1,4 +1,9 @@
 <?php
+/**
+ * Page Specific Definitions
+ */
+define( 'LOCATION', 'Main Page' );
+
 require "start.php";
 
 
@@ -22,6 +27,8 @@ $PAGE->begin();
 <br><a href='" . $GLOBALS['conf']->host . "login.php'>Login</a></p>";
 
 		}
+
+		// var_dump( $_SESSION );
 
 $PAGE->end();
 

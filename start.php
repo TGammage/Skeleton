@@ -1,20 +1,20 @@
 <?php
 /**
-*		@filename start.php
-*
-*		@purpose
-*			To setup and initialize backbone of the site.
-*/
+ *		@filename start.php
+ *
+ *		@purpose
+ *			To setup and initialize backbone of the site.
+ */
 
 
 define( 'SITE_DIRECTORY', 'Skeleton' );
 
 
 /**
-*
-*		Debug Mode
-*
-*/
+ *
+ *		Debug Mode
+ *
+ */
 
 
 $debug = true;
@@ -22,20 +22,20 @@ $debug = true;
 
 
 /**
-*
-*		Site Definitions
-*
-*/
+ *
+ *		Site Definitions
+ *
+ */
 
 
 require 'lib/php/definitions.php';
 
 
 /**
-*
-*		Configuration
-*
-*/
+ *
+ *		Configuration
+ *
+ */
 
 
 require ROOT_DIR . DIRECTORY_SEPARATOR . 'lib/x/config.php';
@@ -44,45 +44,44 @@ $GLOBALS['conf'] = new SystemCore\Config;
 
 
 /**
-*
-*		Error Handler
-*
-*/
+ *
+ *		Error Handler
+ *
+ */
 
 
 require $GLOBALS['conf']->dir['php'] . DIRECTORY_SEPARATOR . 'ErrorHandler.php';
 
 
 /**
-*
-*		Autoloader
-*
-*/
+ *
+ *		Autoloader
+ *
+ */
 
 
 require $GLOBALS['conf']->dir['php'] . DIRECTORY_SEPARATOR . 'autoloader.php';
 
 
 /**
-*
-*		Session
-*
-*/
+ *
+ *		Session
+ *
+ */
 
 if( !SYSTEM_REQUEST )
 	$GLOBALS['session'] = new SystemCore\Session();
 
 
 /**
-*
-*
-*
-*/
+ *
+ *		Site Location
+ *
+ */
 
 
-#new DB();
-
-
+if( !SYSTEM_REQUEST && defined( 'LOCATION' ) )
+	new SystemCore\SiteLocation( LOCATION );
 
 
 

@@ -330,6 +330,9 @@ class Session extends SessionFunctions
 
 		$db = new \db( 'member' );
 
+		// Update Location
+		new SiteLocation( 'Logout', $db );
+
 		$user_ID = $_SESSION['user']['id'];
 
 		// Delete session files for all sessions tied to this account ( ban purposes )
