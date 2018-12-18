@@ -1,13 +1,7 @@
 Apache
 	- Clean up verfiy email redirects
 
-Password Recovery
-	- Try to run things in an erroneous manner to see behaviors and bugs
-	- Check for any security breaches if available
-	- Consolidate and condense code if possible,
-		you used copy and paste a few times....
-
-Update profile info
+Update profile info from logged in position
 	- Names
 	- Password
 	- email
