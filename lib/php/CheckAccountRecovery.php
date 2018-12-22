@@ -212,7 +212,7 @@ class CheckAccountRecovery extends check
         }
 
         // Password format check
-        if( !preg_match( $GLOBALS['conf']->regex['password'], $_POST['access'] ) )
+        if( !preg_match( \regex::PASSWORD, $_POST['access'] ) )
         {
             $_SESSION['url_key']['password_recovery'] = \random::string( 16 );
 

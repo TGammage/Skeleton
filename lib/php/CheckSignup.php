@@ -83,12 +83,12 @@ class CheckSignup extends check
 			return;
 
 		// Pattern Checks
-		if( !preg_match( $GLOBALS['conf']->regex['username'], $_POST['username'] ) )
+		if( !preg_match( \regex::USERNAME, $_POST['username'] ) )
 		{
 			parent::fail( "Bad Pattern Username" );
 		}
 
-		if( !preg_match( $GLOBALS['conf']->regex['password'], $_POST['access'] ) )
+		if( !preg_match( \regex::PASSWORD, $_POST['access'] ) )
 		{
 			parent::fail( "Bad Pattern Password" );
 		}

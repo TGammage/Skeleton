@@ -64,7 +64,7 @@ class CheckLogin extends check
 		{
 			case "username";
 
-				if( !preg_match( $GLOBALS['conf']->regex['username'], $_POST['identify'] ) )
+				if( !preg_match( \regex::USERNAME, $_POST['identify'] ) )
 				{
 					parent::fail( "Bad Pattern Identifier" );
 					return;
@@ -167,7 +167,7 @@ class CheckLogin extends check
 			return;
 		}
 
-		if( !preg_match( $GLOBALS['conf']->regex['password'], $_POST['access'] ) )
+		if( !preg_match( \regex::PASSWORD, $_POST['access'] ) )
 		{
 			parent::fail( "Bad Pattern Password" );
 			return;
