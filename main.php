@@ -28,6 +28,11 @@ $PAGE->begin();
 
 		}
 
+		echo "
+<p>
+<a href='" . $GLOBALS['conf']->host . "profile.php'>Profile</a>
+</p>";
+
 		// var_dump( $_SESSION );
 
 $PAGE->end();

@@ -19,7 +19,7 @@ class SignupEmail extends email
 	 * @param	string $email		Email address for new signup
 	 * @param	string $username	Desired username for the new signup
 	 *
-	 * @return bool
+	 * @return void
 	 */
 	public function __construct( $email, $username )
 	{

@@ -81,18 +81,18 @@ class email
 	
 
 	/**
-	*		send()
-	*
-	*		@purpose
-	*			Sends off email with given parameters.
-	*			Will check for attachments and adjust headers
-	*			and message for proper mail() format.
-	*
-	*		@param string	$email	Email address of recipient
-	*		@param string	$name	Optional. Name of recipient
-	*
-	*		@return void
-	*/
+	 * send()
+	 *
+	 * @purpose
+	 *  Sends off email with given parameters.
+	 *	Will check for attachments and adjust headers
+	 *	and message for proper mail() format.
+	 *
+	 * @param string	$email	Email address of recipient
+	 * @param string	$name	Optional. Name of recipient
+	 *
+	 * @return void
+	 */
 	public function send()
 	{
 		self::set_headers();
@@ -110,13 +110,13 @@ class email
 	}
 
 	/**
-	*		set_headers()
-	*
-	*		@purpose
-	*			Sets up headers for sending email.
-	*
-	*		@return void
-	*/
+	 * set_headers()
+	 *
+	 * @purpose
+	 * Sets up headers for sending email.
+	 *
+	 * @return void
+	 */
 	private function set_headers()
 	{
 		/** To : */
@@ -137,13 +137,13 @@ class email
 	}
 
 	/**
-	*		set_content()
-	*
-	*		@purpose
-	*			Sets up content for sending email.
-	*
-	*		@return void
-	*/
+	 * set_content()
+	 *
+	 * @purpose
+	 *  Sets up content for sending email.
+	 *
+	 * @return void
+	 */
 	private function set_content()
 	{
 		// Multipart/mixed
@@ -179,16 +179,16 @@ class email
 	}
 
 	/**
-	*		to()
-	*
-	*		@purpose
-	*			Adds to collection of recipients to send to
-	*
-	*		@param string	$email	Email address of recipient
-	*		@param string	$name	Optional. Name of recipient
-	*
-	*		@return void
-	*/
+	 * to()
+	 *
+	 * @purpose
+	 *	Adds to collection of recipients to send to
+	 *
+	 * @param string	$email	Email address of recipient
+	 * @param string	$name	Optional. Name of recipient
+	 *
+	 * @return void
+	 */
 	public function to( $email, $name = false )
 	{
 		$prepend = $name ? "$name " : '';
@@ -197,16 +197,16 @@ class email
 	}
 
 	/**
-	*		from()
-	*
-	*		@purpose
-	*			Adds to collection of recipients to send to
-	*
-	*		@param string	$email	Email address of recipient
-	*		@param string	$name	Optional. Name of recipient
-	*
-	*		@return void
-	*/
+	 * from()
+	 *
+	 * @purpose
+	 *	Adds to collection of recipients to send to
+	 *
+	 * @param string	$email	Email address of recipient
+	 * @param string	$name	Optional. Name of recipient
+	 *
+	 * @return void
+	 */
 	public function from( $email, $name = false )
 	{
 		$prepend = $name ? "$name " : '';
@@ -215,16 +215,16 @@ class email
 	}
 
 	/**
-	*		cc()
-	*
-	*		@purpose
-	*			Adds to collection of copied recipients to add to headers when sending
-	*
-	*		@param string	$email	Email address of recipient
-	*		@param string	$name	Optional. Name of recipient
-	*
-	*		@return void
-	*/
+	 * cc()
+	 *
+	 * @purpose
+	 *	Adds to collection of copied recipients to add to headers when sending
+	 *
+	 * @param string	$email	Email address of recipient
+	 * @param string	$name	Optional. Name of recipient
+	 *
+	 * @return void
+	 */
 	public function cc( $email, $name = false )
 	{
 		$prepend = $name ? "$name " : '';
@@ -233,16 +233,16 @@ class email
 	}
 
 	/**
-	*		bcc()
-	*
-	*		@purpose
-	*			Adds to collection of blind copied recipients to add to headers when sending
-	*
-	*		@param string	$email	Email address of recipient
-	*		@param string	$name	Optional. Name of recipient
-	*
-	*		@return void
-	*/
+	 * bcc()
+	 *
+	 * @purpose
+	 *	Adds to collection of blind copied recipients to add to headers when sending
+	 *
+	 * @param string	$email	Email address of recipient
+	 * @param string	$name	Optional. Name of recipient
+	 *
+	 * @return void
+	 */
 	public function bcc( $email, $name = false )
 	{
 		$prepend = $name ? "$name " : '';
@@ -251,16 +251,16 @@ class email
 	}
 
 	/**
-	*		reply_to()
-	*
-	*		@purpose
-	*			Designates to whom the recipient should reply
-	*
-	*		@param string	$email	Email address of reply-to recipient
-	*		@param string	$name	Optional. Name of reply-to recipient
-	*
-	*		@return void
-	*/
+	 * reply_to()
+	 *
+	 * @purpose
+	 *  Designates to whom the recipient should reply
+	 *
+	 * @param string	$email	Email address of reply-to recipient
+	 * @param string	$name	Optional. Name of reply-to recipient
+	 *
+	 * @return void
+	 */
 	public function reply_to( $email, $name = false )
 	{
 		$prepend = $name ? "$name " : '';
@@ -269,46 +269,46 @@ class email
 	}
 
 	/**
-	*		priority()
-	*
-	*		@purpose
-	*			Adds to collection of blind copied recipients to add to headers when sending
-	*
-	*		@param string	$level	Number corresponding to importance level
-	*
-	*		@return void
-	*/
+	 * priority()
+	 *
+	 * @purpose
+	 *	Adds to collection of blind copied recipients to add to headers when sending
+	 *
+	 * @param string	$level	Number corresponding to importance level
+	 *
+	 * @return void
+	 */
 	public function priority( $level )
 	{
 		$this->priority = "X-Priority: " . $level . "\r\n";
 	}
 
 	/**
-	*		subject()
-	*
-	*		@purpose
-	*			Adds to collection of recipients to send to
-	*
-	*		@param string	$_	Subject line of email
-	*
-	*		@return void
-	*/
+	 * subject()
+	 *
+	 * @purpose
+	 *	Adds to collection of recipients to send to
+	 *
+	 * @param string	$_	Subject line of email
+	 *
+	 * @return void
+	 */
 	public function subject( $_ )
 	{
 		$this->subject = $_;
 	}
 
 	/**
-	*		message()
-	*
-	*		@purpose
-	*			Adds to collection of recipients to send to
-	*
-	*		@param string	$message	Subject line of email
-	*		@param int		$mime_type	MIME code
-	*
-	*		@return void
-	*/
+	 * message()
+	 *
+	 * @purpose
+	 *	Adds to collection of recipients to send to
+	 *
+	 * @param string	$message	Subject line of email
+	 * @param int		$mime_type	MIME code
+	 *
+	 * @return void
+	 */
 	public function message( $message, $mime_type = 1 )
 	{
 		$formatted_message = wordwrap( $message, 70, "\r\n" );
@@ -320,15 +320,15 @@ class email
 	}
 
 	/**
-	*		MIME()
-	*
-	*		@purpose
-	*			Changes MIME type of last content_block
-	*
-	*		@param string	$code	MIME code constant
-	*
-	*		@return void
-	*/
+	 * MIME()
+	 *
+	 * @purpose
+	 * 	Changes MIME type of last content_block
+	 *
+	 * @param string	$code	MIME code constant
+	 *
+	 * @return void
+	 */
 	public function MIME( $code )
 	{
 		$pop = array_pop( $this->content_block );
@@ -339,15 +339,15 @@ class email
 	}
 
 	/**
-	*		MIME_STRING()
-	*
-	*		@purpose
-	*			Adds to collection of recipients to send to
-	*
-	*		@param string	$code	MIME code constant
-	*
-	*		@return string MIME content for message
-	*/
+	 * MIME_STRING()
+	 *
+	 * @purpose
+	 *	Adds to collection of recipients to send to
+	 *
+	 * @param string	$code	MIME code constant
+	 *
+	 * @return string MIME content for message
+	 */
 	public function MIME_STRING( $code )
 	{
 		switch( $code )
@@ -379,15 +379,15 @@ class email
 	}
 
 	/**
-	*		attach()
-	*
-	*		@purpose
-	*			Checks if file exists and adds to atatchments array for sending
-	*
-	*		@param string	$file	File path and name of attachment
-	*
-	*		@return void
-	*/
+	 * attach()
+	 *
+	 * @purpose
+	 *	Checks if file exists and adds to atatchments array for sending
+	 *
+	 * @param string	$file	File path and name of attachment
+	 *
+	 * @return void
+	 */
 	public function attach( $file )
 	{
 		if( !is_file( $file ) )

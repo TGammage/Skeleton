@@ -266,14 +266,16 @@ class CheckLogin extends check
 		if( !$this->success )
 			return;
 
-		$query = "SELECT `username`, `email`, `email_verified`, `sec_level`, `last_updated` FROM `member` WHERE `id` = " . $this->user_ID . " LIMIT 1";
+		$query = "SELECT * FROM `profile_info` WHERE `id` = " . $this->user_ID . " LIMIT 1";
 
 		$criticals = $this->db->query( $query, null, \PDO::FETCH_ASSOC, true );
 
 		$_SESSION['user']['id']				= $this->user_ID;
 		$_SESSION['user']['name']			= $criticals['username'];
+		$_SESSION['user']['first_name']		= $criticals['first_name'];
+		$_SESSION['user']['last_name']		= $criticals['last_name'];
 		$_SESSION['user']['email']			= $criticals['email'];
-		$_SESSION['user']['email_verified']	= $criticals['email'];
+		$_SESSION['user']['email_verified']	= $criticals['email_verified'];
 		$_SESSION['user']['last_updated']	= $criticals['last_updated'];
 		$_SESSION['sec_level']				= $criticals['sec_level'];
 

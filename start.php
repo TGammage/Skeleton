@@ -75,12 +75,27 @@ if( !SYSTEM_REQUEST )
 
 /**
  *
+ *		Logged In Restriction
+ *
+ */
+
+
+if( defined( 'LOGGEDINONLY' ) && LOGGEDINONLY && !$GLOBALS['session']->logged_in )
+{
+	header( 'Location:' . $GLOBALS['conf']->host );
+	exit();
+}
+
+
+
+/**
+ *
  *		Site Location
  *
  */
 
 
-if( !SYSTEM_REQUEST && defined( 'LOCATION' ) )
+if( defined( 'LOCATION' ) )
 	new SystemCore\SiteLocation( LOCATION );
 
 

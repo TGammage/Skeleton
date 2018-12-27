@@ -31,6 +31,8 @@ CREATE TABLE `member` (
   `username` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
   `email` varchar(254) COLLATE utf8mb4_general_ci NOT NULL,
   `email_verified` TINYINT(1) NOT NULL DEFAULT 0,
+  `first_name` varchar(20) NULL DEFAULT NULL,
+  `last_name` varchar(30) NULL DEFAULT NULL,
   `access` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `sec_level` TINYINT(1) NOT NULL DEFAULT 1,
   `created_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -41,6 +43,8 @@ CREATE TABLE `member` (
 ALTER TABLE `member`
   ADD UNIQUE KEY `unique_username` (`username`),
   ADD UNIQUE KEY `unique_email` (`email`);
+
+CREATE VIEW `profile_info` AS SELECT `id`, `username`, `email`, `email_verified`, `first_name`, `last_name`, `sec_level`,`last_updated` FROM `member`;
 
 --
 --	Table : skeleton_dev_member.session

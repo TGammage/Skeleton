@@ -1,18 +1,14 @@
 Apache
 	- Clean up verfiy email redirects
 
-Update profile info from logged in position
-	- Names
-	- Password
-	- email
-
-Add Location updater
-
 Add Clearance capabilities
 
 Frame
 	- Add function to output raw js or css
 	- Can use this to make email HTML output
+
+HTML
+	- outputs some common html elements that are common over pages
 
 Tick
 	- Divide actions based off minute 
