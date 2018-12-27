@@ -80,7 +80,8 @@ class Login
 	<input type='password' name='access' placeholder='Password'$autofocus_access /><br>
 	<input type='submit' value='Login'/>
 </form>
-<a href='account_recovery.php'>Forgot My Password</a>";
+<a href='account_recovery.php'>Forgot My Password</a><br>
+<a href='signup.php'>Signup</a>";
 		}
 
 		$PAGE->end();

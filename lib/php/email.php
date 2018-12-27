@@ -78,6 +78,9 @@ class email
 
 	/** @var bool Error trigger that prevents mail()  */
 	protected $error = false;
+
+	/** @var bool Email was sending successful? */
+	public $sent = false;
 	
 
 	/**
@@ -100,7 +103,7 @@ class email
 
 		if( !$this->error )
 		{
-			$sent = mail(
+			$this->sent = mail(
 				null,
 				$this->subject,
 				$this->message,

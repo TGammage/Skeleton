@@ -15,7 +15,7 @@ class Signup
 	{
 		if( $_SERVER['REQUEST_METHOD'] === 'POST' )
 		{
-			new SystemCore\CheckSignup;
+			new SystemCore\Signup\CheckSignup;
 
 			return;
 		}
@@ -45,10 +45,12 @@ class Signup
 		echo "
 <form method='POST' action='?unique={$_SESSION['url_key']['signup']}'>
 	<input type='hidden' name='unique' value='{$_SESSION['var_key']['signup']}' />
-	<input type='text' name='username' placeholder='username' value='TGame' autofocus /><br>
-	<input type='text' name='email' placeholder='email' value='tgammage107543@yahoo.com'/><br>
-	<input type='password' name='access' placeholder='Password' value='Arvato01!' /><br>
-	<input type='password' name='confirm_access' placeholder='Password' value='Arvato01!' /><br>
+	<input type='text' name='username' placeholder='Username' value='' autofocus /><br>
+	<input type='text' name='email' placeholder='email' value=''/><hr>
+	<input type='text' name='first_name' placeholder='First Name' value=''/><br>
+	<input type='text' name='last_name' placeholder='Last Name' value=''/><hr>
+	<input type='password' name='access' placeholder='Password' value='' /><br>
+	<input type='password' name='confirm_access' placeholder='Confirm Password' value='' /><br>
 	<input type='submit' value='Signup'/>
 </form>";
 

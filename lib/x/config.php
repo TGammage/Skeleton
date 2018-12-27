@@ -169,6 +169,10 @@ class Config
 			*/
 			$this->data['login']['identify_by']	= 'username';
 
+			/**
+			* 		Login On Signup
+			*/
+			$this->data['login']['signup'] = true;
 
 			/**
 			*		Password Pepper

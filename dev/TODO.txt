@@ -4,6 +4,7 @@ Apache
 
 php.ini
 	- fix gc.probability to eliminate
+	- lengthen session time to match 
 
 Optimize Error Handling
 	- Adding directories for cleaner organization

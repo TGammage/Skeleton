@@ -95,7 +95,7 @@ if( defined( 'LOGGEDINONLY' ) && LOGGEDINONLY && !$GLOBALS['session']->logged_in
  */
 
 
-if( defined( 'LOCATION' ) )
+if( defined( 'LOCATION' ) && $GLOBALS['session']->logged_in )
 	new SystemCore\SiteLocation( LOCATION );
 
 
