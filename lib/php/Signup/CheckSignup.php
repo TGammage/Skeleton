@@ -51,6 +51,8 @@ class CheckSignup extends \SystemCore\check
 			$this->db = null;
 		}
 
+		self::error_reporting();
+
 		self::redirect();
 	}
 
@@ -281,7 +283,6 @@ class CheckSignup extends \SystemCore\check
 
 		// New member email verification
 		$mail = new SignupEmail( $_POST['email'], $_POST['username'] );
-		var_dump( $mail->sent );
 
 		if( !$mail->sent )
 		{
@@ -327,6 +328,44 @@ class CheckSignup extends \SystemCore\check
 	}
 
 	/**
+	 * error_reporting()
+	 *
+	 * @purpose
+	 *  Log server generated errors
+	 *
+	 * @return void
+	 */
+	private function error_reporting()
+	{
+		if( $this->success )
+			return;
+
+		$errors = explode( '+', $this->error_data );
+		sort( $errors );
+
+		$message ='';
+
+		foreach( $errors as $code )
+		{
+			if( $code > SignupError::BACKSIDE_ONLY )
+			{
+				$message .= SignupError::message( $code );
+			}
+		}
+
+		if( strlen( $message ) > 0 )
+		{
+			new \SystemCore\ErrorHandler(
+				2,
+				$message,
+				__FILE__,
+				__LINE__
+			);
+		}
+
+	}
+
+	/**
 	 * redirect()
 	 *
 	 * @purpose
@@ -343,6 +382,14 @@ class CheckSignup extends \SystemCore\check
 		} else {
 			//Failure
 			$append = $this->error_data;
+
+			foreach( $this->submitted_input as $key => $input )
+			{
+				if( $key !== 'access' && $key !== 'confirm_access' )
+				{
+					$append .= "&$key=" . urlencode( $input );
+				}
+			}
 		}
 
 		header( "Location:signup.php?response=$append" );

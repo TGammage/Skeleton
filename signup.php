@@ -40,17 +40,28 @@ class Signup
 		$_SESSION['url_key']['signup']	= random::string( 16 );
 		$_SESSION['var_key']['signup']	= random::string( 16 );
 
-		$placeholder = ucfirst( $GLOBALS['conf']->login['identify_by'] );
+		$inputs = array(
+			'username', 'email',
+			'first_name', 'last_name',
+			'access', 'confirm_access'
+		);
+
+		$preset = array();
+
+		foreach( $inputs as  $key )
+		{
+			$preset[$key] = isset( $_GET[ $key ] ) ? urldecode( $_GET[ $key ] ) : '';
+		}
 
 		echo "
 <form method='POST' action='?unique={$_SESSION['url_key']['signup']}'>
 	<input type='hidden' name='unique' value='{$_SESSION['var_key']['signup']}' />
-	<input type='text' name='username' placeholder='Username' value='' autofocus /><br>
-	<input type='text' name='email' placeholder='email' value=''/><hr>
-	<input type='text' name='first_name' placeholder='First Name' value=''/><br>
-	<input type='text' name='last_name' placeholder='Last Name' value=''/><hr>
-	<input type='password' name='access' placeholder='Password' value='' /><br>
-	<input type='password' name='confirm_access' placeholder='Confirm Password' value='' /><br>
+	<input type='text' name='username' placeholder='Username' value='{$preset['username']}' autofocus /><br>
+	<input type='text' name='email' placeholder='email' value='{$preset['email']}'/><hr>
+	<input type='text' name='first_name' placeholder='First Name' value='{$preset['first_name']}'/><br>
+	<input type='text' name='last_name' placeholder='Last Name' value='{$preset['last_name']}'/><hr>
+	<input type='password' name='access' placeholder='Password' /><br>
+	<input type='password' name='confirm_access' placeholder='Confirm Password' /><br>
 	<input type='submit' value='Signup'/>
 </form>";
 

@@ -6,7 +6,7 @@ php.ini
 	- fix gc.probability to eliminate
 	- lengthen session time to match 
 
-Optimize Error Handling
+Optimize Error Handling : Login, AccountRecovery, Session
 	- Adding directories for cleaner organization
 	- Defining namespaces better
 	- autoloading namespaces and directories

@@ -24,13 +24,12 @@ class SignupError
     const FORMAT_LAST_NAME      = 1014;
     const FORMAT_PASSWORD       = 1015;
     const CONFIRM_PASSWORD      = 1016;
+    //-----Server Visibility Only-----
     const BACKSIDE_ONLY         = 1017;
-    const KEY_MISMATCH          = 1018;
     const MEMBER_DB_INSERTION   = 1019;
     const MAIN_DB_INSERTION     = 1020;
     const SEND_EMAIL            = 1021;
     const MEMBER_UNLOCK         = 1022;
-    //-----Server Visibility Only-----
     //-----Server Visibility Only-----
 
     /**
@@ -64,7 +63,7 @@ class SignupError
             case self::FORMAT_LAST_NAME     : $message = "Last name format unaccepted"; break;
             case self::FORMAT_PASSWORD      : $message = "Password format unaccepted"; break;
             case self::CONFIRM_PASSWORD     : $message = "Password confirmation mismatch"; break;
-            case self::KEY_MISMATCH         : $message = "Token mismatch"; break;
+            //-----Server Visibility Only-----
             case self::MEMBER_DB_INSERTION  : $message = "Member database insertion"; break;
             case self::MAIN_DB_INSERTION    : $message = "Main database insertion"; break;
             case self::SEND_EMAIL           : $message = "Sending signup email"; break;
