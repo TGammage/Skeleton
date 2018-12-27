@@ -1,7 +1,21 @@
 Apache
 	- Clean up verfiy email redirects
+	- Alias img-bin directory
+
+php.ini
+	- fix gc.probability to eliminate
+
+Optimize Error Handling
+	- Adding directories for cleaner organization
+	- Defining namespaces better
+	- autoloading namespaces and directories
+	- Error handling class specified for each "branch"
+	- Adjust front side pages to find correct back side pages
 
 Add Clearance capabilities
+	- Restricting based of sec level
+	- Allowing for "Staff" members with privileges
+	- Allow for a "Guest" member than only has a temporary time limit
 
 Frame
 	- Add function to output raw js or css
@@ -9,8 +23,10 @@ Frame
 
 HTML
 	- outputs some common html elements that are common over pages
+	- templates
 
 Tick
 	- Divide actions based off minute 
 	- DB clean up
 	- DB backup
+	- gc on specific ticks for cleaning purposes
