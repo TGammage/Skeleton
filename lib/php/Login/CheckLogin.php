@@ -1,17 +1,14 @@
 <?php
 
-namespace SystemCore;
+namespace SystemCore\Login;
 
-class CheckLogin extends check
+class CheckLogin extends \SystemCore\check
 {
 	/** @var mysql Database handle */
 	private	$db = null;
 
 	/** @var int Member ID number */
 	private	$user_ID = 0;
-
-	/** @var string Return variables sent back to login page */
-	private	$return_data = '';
 
 	/**
 	 *
@@ -21,18 +18,21 @@ class CheckLogin extends check
 	public function __construct()
 	{
 		// Token Matching
-		parent::key_check( 'login' );
+		if( parent::key_check( 'login' ) )
+		{
+			// Confirm Credentials
+			$this->db = new \db( 'member', 'portal' );
 
-		// Confirm Credentials
-		$this->db = new \db( 'member', 'portal' );
+				self::identifier_check();
 
-			self::identifier_check();
+				self::banned_check();
 
-			self::banned_check();
+				self::password_check();
 
-			self::password_check();
+			$this->db = null;
+		}
 
-		$this->db = null;
+		self::error_reporting();
 
 		// Set up session
 		self::new_login();
@@ -48,13 +48,9 @@ class CheckLogin extends check
 	 */
 	private function identifier_check()
 	{
-		// Skip on prior failure
-		if( !$this->success )
-			return;
-
 		if( !isset( $_POST['identify'] ) )
 		{
-			parent::fail( "Missing Identifier" );
+			parent::fail( LoginError::MISSING_IDENTIFIER );
 			return;
 		}
 
@@ -66,7 +62,7 @@ class CheckLogin extends check
 
 				if( !preg_match( \regex::USERNAME, $_POST['identify'] ) )
 				{
-					parent::fail( "Bad Pattern Identifier" );
+					parent::fail( LoginError::FORMAT_IDENTIFIER );
 					return;
 				}
 
@@ -78,7 +74,7 @@ class CheckLogin extends check
 
 				if( !is_email( $_POST['identify'] ) )
 				{
-					parent::fail( "Bad Pattern Identifier" );
+					parent::fail( LoginError::FORMAT_IDENTIFIER );
 					return;
 				}
 
@@ -86,27 +82,30 @@ class CheckLogin extends check
 
 			default:
 
-				parent::fail( "Configuration Setting Invalid" );
+				parent::fail( LoginError::CONFIG_SETTING );
 				return;
 
 			break;
 		}
 
+		// Check member database for this account
 		$query = "SELECT `id`, `lockout` FROM `member` WHERE `$identifier` = ? LIMIT 1";
 
 		$param = array( $_POST['identify'] );
 
 		$result = $this->db->query( $query, $param, \PDO::FETCH_ASSOC, true );
 
+		// Account Not Found
 		if( !$result )
 		{
-			parent::fail( "Member Not Found" );
+			parent::fail( LoginError::ACCOUNT_NOT_FOUND );
 			return;
 		}
 
+		// Account Lockout
 		if( $result['lockout'] == 1 )
 		{
-			parent::fail( "Member Account Locked" );
+			parent::fail( LoginError::ACCOUNT_LOCKED );
 			return;
 		}
 
@@ -140,7 +139,7 @@ class CheckLogin extends check
 
 				if( $timestamp->getTimestamp() >= $_SERVER['REQUEST_TIME'] )
 				{
-					parent::fail( "Member banned" );
+					parent::fail( LoginError::ACCOUNT_BANNED );
 					return;
 				}
 			}
@@ -163,13 +162,13 @@ class CheckLogin extends check
 
 		if( !isset( $_POST['access'] ) )
 		{
-			parent::fail( "Missing Password" );
+			parent::fail( LoginError::MISSING_PASSWORD );
 			return;
 		}
 
 		if( !preg_match( \regex::PASSWORD, $_POST['access'] ) )
 		{
-			parent::fail( "Bad Pattern Password" );
+			parent::fail( LoginError::FORMAT_PASSWORD );
 			return;
 		}
 
@@ -181,11 +180,11 @@ class CheckLogin extends check
 
 		$result = $this->db->query( $query, $param, \PDO::FETCH_ASSOC, true );
 
-		$hasher = new PepperedPassword;
+		$hasher = new \SystemCore\PepperedPassword;
 
 		if( !$hasher->verify( $_POST['access'], $result['access'] ) )
 		{
-			parent::fail( "Bad Password" );
+			parent::fail( LoginError::INCORRECT_PASSWORD );
 		}
 	}
 
@@ -247,7 +246,7 @@ class CheckLogin extends check
 
 			if( $count == 0 )
 			{
-				parent::fail( "Failed to establish a new session in database." );
+				parent::fail( LoginError::SESSION_CREATE_DATABASE );
 			}
 		}
 	}
@@ -395,6 +394,42 @@ class CheckLogin extends check
 	}
 
 	/**
+	 * error_reporting()
+	 *
+	 * @purpose
+	 *  Log server generated errors
+	 *
+	 * @return void
+	 */
+	private function error_reporting()
+	{
+		if( $this->success )
+			return;
+
+		$errors = explode( '+', $this->error_data );
+
+		$message ='';
+
+		foreach( $errors as $code )
+		{
+			if( $code > LoginError::BACKSIDE_ONLY )
+			{
+				$message .= LoginError::message( $code );
+			}
+		}
+
+		if( strlen( $message ) > 0 )
+		{
+			new \SystemCore\ErrorHandler(
+				2,
+				$message,
+				__FILE__,
+				__LINE__
+			);
+		}
+	}
+
+	/**
 	 * redirect()
 	 *
 	 * @purpose
@@ -406,7 +441,7 @@ class CheckLogin extends check
 	{
 		if( $this->success )
 		{
-			header( "Location:" . $GLOBALS['conf']->host . "main.php" );
+			header( "Location:main.php" );
 		} else {
 			
 			$url = $GLOBALS['conf']->host . "login.php";
@@ -419,6 +454,7 @@ class CheckLogin extends check
 			}
 
 			header( "Location:$url$query" );
+			// print( "Location:$url$query" );
 		}
 	}
 }

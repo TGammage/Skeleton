@@ -1,8 +1,8 @@
 <?php
 
-namespace SystemCore;
+namespace SystemCore\Login;
 
-class CheckLogout extends check
+class CheckLogout extends \SystemCore\check
 {
 	/**
 	 *
@@ -12,12 +12,8 @@ class CheckLogout extends check
 	public function __construct()
 	{
 		// Token Matching
-		parent::key_check( 'logout', true );
-
-		if( $this->success )
-		{
+		if( parent::key_check( 'logout', true ) )
 			$GLOBALS['session']->session_force_logout();
-		}
 	}
 
 	/**

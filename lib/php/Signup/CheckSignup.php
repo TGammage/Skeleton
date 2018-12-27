@@ -341,7 +341,6 @@ class CheckSignup extends \SystemCore\check
 			return;
 
 		$errors = explode( '+', $this->error_data );
-		sort( $errors );
 
 		$message ='';
 
@@ -362,7 +361,6 @@ class CheckSignup extends \SystemCore\check
 				__LINE__
 			);
 		}
-
 	}
 
 	/**
