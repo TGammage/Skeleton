@@ -41,6 +41,11 @@ spl_autoload_register(
 				$pathname = $GLOBALS['conf']->dir['php'] . DIRECTORY_SEPARATOR . "Profile" . DIRECTORY_SEPARATOR;
 			break;
 
+			// ROOT_DIR\lib\php\AccountRecovery
+			case 'SystemCore\AccountRecovery' :
+				$pathname = $GLOBALS['conf']->dir['php'] . DIRECTORY_SEPARATOR . "AccountRecovery" . DIRECTORY_SEPARATOR;
+			break;
+
 			// ROOT_DIR\lib\html
 			case 'HTML' :
 				$pathname = $GLOBALS['conf']->dir['html'] . DIRECTORY_SEPARATOR;

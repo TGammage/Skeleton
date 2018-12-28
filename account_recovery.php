@@ -15,7 +15,7 @@ class AccountRecovery
 	{
 		if( $_SERVER['REQUEST_METHOD'] === 'POST' )
 		{
-            new SystemCore\CheckAccountRecovery;
+            new SystemCore\AccountRecovery\CheckAccountRecovery;
 			return;
 		}
 

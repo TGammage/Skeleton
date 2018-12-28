@@ -1,8 +1,8 @@
 <?php
 
-namespace SystemCore;
+namespace SystemCore\AccountRecovery;
 
-class AccountRecoveryEmail extends email
+class AccountRecoveryEmail extends \SystemCore\email
 {
 	/** @var string Unique identifier used to determining which account we are recovering */
 	public	$token = false;

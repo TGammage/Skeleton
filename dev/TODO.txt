@@ -6,13 +6,6 @@ php.ini
 	- fix gc.probability to eliminate
 	- lengthen session time to match 
 
-Optimize Error Handling : AccountRecovery
-	- Adding directories for cleaner organization
-	- Defining namespaces better
-	- autoloading namespaces and directories
-	- Error handling class specified for each "branch"
-	- Adjust front side pages to find correct back side pages
-
 Add Clearance capabilities
 	- Restricting based of sec level
 	- Allowing for "Staff" members with privileges
