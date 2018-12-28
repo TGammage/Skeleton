@@ -70,7 +70,7 @@ require $GLOBALS['conf']->dir['php'] . DIRECTORY_SEPARATOR . 'autoloader.php';
  */
 
 if( !SYSTEM_REQUEST )
-	$GLOBALS['session'] = new SystemCore\Session();
+	$GLOBALS['session'] = new SystemCore\Session\Session();
 
 
 /**
@@ -96,7 +96,7 @@ if( defined( 'LOGGEDINONLY' ) && LOGGEDINONLY && !$GLOBALS['session']->logged_in
 
 
 if( defined( 'LOCATION' ) && $GLOBALS['session']->logged_in )
-	new SystemCore\SiteLocation( LOCATION );
+	new SystemCore\Session\SiteLocation( LOCATION );
 
 
 

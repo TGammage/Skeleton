@@ -1,6 +1,6 @@
 <?php
 
-namespace SystemCore;
+namespace SystemCore\Session;
 
 class Session extends SessionFunctions
 {
@@ -26,7 +26,7 @@ class Session extends SessionFunctions
 	{
 		if( !parent::init() )
 		{
-			throw new ErrorHandler( 2, 'Could Not Start Session', __file__, 27  );
+			throw new \SystemCore\ErrorHandler( 2, 'Could Not Start Session', __file__, 27  );
 		}
 
 		self::session_login_check();

@@ -1,6 +1,6 @@
 <?php
 
-namespace SystemCore;
+namespace SystemCore\Session;
 
 class SiteLocation
 {

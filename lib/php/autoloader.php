@@ -31,6 +31,11 @@ spl_autoload_register(
 				$pathname = $GLOBALS['conf']->dir['php'] . DIRECTORY_SEPARATOR . "Login" . DIRECTORY_SEPARATOR;
 			break;
 
+			// ROOT_DIR\lib\php\Session
+			case 'SystemCore\Session' :
+				$pathname = $GLOBALS['conf']->dir['php'] . DIRECTORY_SEPARATOR . "Session" . DIRECTORY_SEPARATOR;
+			break;
+
 			// ROOT_DIR\lib\php\Profile
 			case 'SystemCore\Profile' :
 				$pathname = $GLOBALS['conf']->dir['php'] . DIRECTORY_SEPARATOR . "Profile" . DIRECTORY_SEPARATOR;
