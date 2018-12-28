@@ -1,8 +1,8 @@
 <?php
 
-namespace SystemCore;
+namespace SystemCore\AccountRecovery;
 
-class CheckAccountRecovery extends check
+class CheckAccountRecovery extends \SystemCore\check
 {
     /**
      *
@@ -11,15 +11,7 @@ class CheckAccountRecovery extends check
      */
     public function __construct()
     {
-        if( !isset( $_GET['step'] ) )
-        {
-            header( "Location:/account_recovery.php" );
-            exit();
-        }
-
-        parent::key_check( 'account_recovery' );
-
-        if( !$this->success )
+        if( !isset( $_GET['step'] ) || !parent::key_check( 'account_recovery' ) )
         {
             header( "Location:/account_recovery.php" );
             exit();
@@ -212,7 +204,7 @@ class CheckAccountRecovery extends check
         }
 
         // Password format check
-        if( !preg_match( $GLOBALS['conf']->regex['password'], $_POST['access'] ) )
+        if( !preg_match( \regex::PASSWORD, $_POST['access'] ) )
         {
             $_SESSION['url_key']['password_recovery'] = \random::string( 16 );
 
@@ -246,7 +238,7 @@ class CheckAccountRecovery extends check
         }
 
         // Update new password in the member database
-		$hasher = new PepperedPassword;
+		$hasher = new \SystemCore\PepperedPassword;
 
 		$password = $hasher->hash( $_POST['access'] );
 

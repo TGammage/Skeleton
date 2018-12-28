@@ -1,9 +1,9 @@
 <?php
 /*
-*		Class Autoloader
-*
-*		File name must Class name (case sensitive)
-*/
+ * Class Autoloader
+ *
+ * File name must Class name (case sensitive)
+ */
 
 spl_autoload_register(
 	function( $incoming )
@@ -19,6 +19,31 @@ spl_autoload_register(
 			// ROOT_DIR\lib\php
 			case 'SystemCore' :
 				$pathname = $GLOBALS['conf']->dir['php'] . DIRECTORY_SEPARATOR;
+			break;
+
+			// ROOT_DIR\lib\php\Signup
+			case 'SystemCore\Signup' :
+				$pathname = $GLOBALS['conf']->dir['php'] . DIRECTORY_SEPARATOR . "Signup" . DIRECTORY_SEPARATOR;
+			break;
+
+			// ROOT_DIR\lib\php\Login
+			case 'SystemCore\Login' :
+				$pathname = $GLOBALS['conf']->dir['php'] . DIRECTORY_SEPARATOR . "Login" . DIRECTORY_SEPARATOR;
+			break;
+
+			// ROOT_DIR\lib\php\Session
+			case 'SystemCore\Session' :
+				$pathname = $GLOBALS['conf']->dir['php'] . DIRECTORY_SEPARATOR . "Session" . DIRECTORY_SEPARATOR;
+			break;
+
+			// ROOT_DIR\lib\php\Profile
+			case 'SystemCore\Profile' :
+				$pathname = $GLOBALS['conf']->dir['php'] . DIRECTORY_SEPARATOR . "Profile" . DIRECTORY_SEPARATOR;
+			break;
+
+			// ROOT_DIR\lib\php\AccountRecovery
+			case 'SystemCore\AccountRecovery' :
+				$pathname = $GLOBALS['conf']->dir['php'] . DIRECTORY_SEPARATOR . "AccountRecovery" . DIRECTORY_SEPARATOR;
 			break;
 
 			// ROOT_DIR\lib\html
@@ -48,10 +73,10 @@ spl_autoload_register(
 	});
 
 /**
-*
-*		Load Debug Module
-*
-*/
+ *
+ * Load Debug Module
+ *
+ */
 if( DEBUG )
 {
 	require $GLOBALS['conf']->dir['dev'] . DIRECTORY_SEPARATOR . "debug.php";

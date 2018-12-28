@@ -1,17 +1,14 @@
 <?php
 
-namespace SystemCore;
+namespace SystemCore\Profile;
 
-class AccountRecoveryEmail extends email
+class UpdateEmailVerification extends \SystemCore\email
 {
-	/** @var string Unique identifier used to determining which account we are recovering */
-	public	$token = false;
+	/** @var string Unique identifier used to determining which email we are verifying */
+	private	$token = null;
 
 	/** @var string Verification code for email */
-	public	$code = null;
-
-	/** @var bool Determination of success */
-	public	$success = true;
+	private	$code = null;
 
 	/**
 	 * Constructor
@@ -26,17 +23,15 @@ class AccountRecoveryEmail extends email
 	 */
 	public function __construct( $email, $username )
 	{
-        if( !self::db_update( $email ) )
-        {
-            $this->success = false;
+        var_dump( 'Here' );
+		if( !self::db_update( $email ) )
 			return;
-        }
 
-		parent::to( $_POST['email'], $username );
+		parent::to( $email, $username );
 
-		parent::from( "signup@" . $GLOBALS['conf']->base_domain, "System at " . $GLOBALS['conf']->site_title );
+		parent::from( "system@" . $GLOBALS['conf']->base_domain, "System at " . $GLOBALS['conf']->site_title );
 
-		parent::subject( "Account Recovery at " . $GLOBALS['conf']->site_title );
+		parent::subject( "Profile Update for " . $username );
 
 		parent::message( self::HTML(), parent::MIME_HTML );
 
@@ -56,26 +51,27 @@ class AccountRecoveryEmail extends email
 	private function db_update( $email )
 	{
 		// Add email verification code to email verify list
-		$this->code	= \random::string( 8 );
+		$this->code	= \random::string( 32 );
 		$tomorrow	= date( 'Y-m-d H:i:s', $_SERVER['REQUEST_TIME'] + ( 60 * 60 * 24 ) );
 
 		$db =  new \db( 'tmp' );
 
-		$query = "DELETE FROM `account_recovery` WHERE `email` = ?";
+		$query = "DELETE FROM `email_verify` WHERE `email` = ?";
 
 		$db->query( $query, array( $email ) );
 
-		do
+        // Ensure we have unique token
+        do
 		{
 			$this->token = \random::string( 32 );
 
-			$query = "SELECT `email` FROM `account_recovery` WHERE `id` = ? LIMIT 1";
+			$query = "SELECT `email` FROM `email_verify` WHERE `id` = ? LIMIT 1";
 	
 			$count = $db->query( $query, array( $this->token ) );
 	
 		} while( $count > 0 );
 
-		$query = "INSERT INTO `account_recovery` ( `expiration`, `id`, `email_code`, `email` ) VALUES ( '$tomorrow', ?, ?, ? );";
+		$query = "INSERT INTO `email_verify` ( `expiration`, `id`, `email_code`, `email` ) VALUES ( '$tomorrow', ?, ?, ? );";
 
 		$param = array( $this->token, $this->code, $email );
 
@@ -96,28 +92,25 @@ class AccountRecoveryEmail extends email
 	 */
 	private function HTML()
 	{
-		$link = $GLOBALS['conf']->host . "account_recovery.php?request=code_entry&token=" . $this->token;
+		$link = $GLOBALS['conf']->host . "verify_email.php?token=" . $this->token . "&code=" . $this->code;
 
 		$html = "
 <html>
 <head>
 
-<title>Account Recovery at " . $GLOBALS['conf']->site_title . "</title>
+<title>From " . $GLOBALS['conf']->site_title . "</title>
 </head>
 
 <body>
 
-<h1>Account Recovery</h1>
-<p>We have received your request to recover your account with us. If you have received this email without your consent,
-please contact us.
+<h1>" . $GLOBALS['conf']->site_title . "</h1>
+<p>Your account was recently updated. For account security and password recovery purposes,
+we need to verify your email account.
 
-Please click the link below or enter the url into your browser.
-Copy and paste the code where prompted to continue the recovery process.
+Please click on the link below.
 </p>
 
-<h2>" . $this->code . "</h2>
-
-<h3><a href='$link'>Continue Account Recovery</a></h3>
+<h3><a href='$link'>Verify your Email Address</a></h3>
 
 <p>
 If the link above does not work, please copy and paste this URL into your browser.<br><br>
@@ -131,5 +124,6 @@ If the link above does not work, please copy and paste this URL into your browse
 
 		return $html;
 	}
+
 }
 ?>

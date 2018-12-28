@@ -23,12 +23,6 @@ class Config
 	// Follow Daylight Saving Patterns
 	public	$daylightsaving	= false;
 
-	// Common Regex Patterns
-	public	$regex			= array(
-		'username'	=> '/^[a-zA-Z0-9]{1,12}$/',
-		'password'	=> '/^(?=.*[!@#\$%\^&\*\(\)\+\-=_\'\"\<\>\?\\/\[\]\{\}:;,\.|`~])(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/'
-	);
-
 	// Collective Setup Data
 	private	$data			= array();
 
@@ -174,6 +168,11 @@ class Config
 			*			'username'	current alias
 			*/
 			$this->data['login']['identify_by']	= 'username';
+
+			/**
+			* 		Login On Signup
+			*/
+			$this->data['login']['signup'] = true;
 
 
 			/**
@@ -340,6 +339,11 @@ class Config
 			*			'username'	current alias
 			*/
 			$this->data['login']['identify_by']	= 'username';
+
+			/**
+			* 		Login On Signup
+			*/
+			$this->data['login']['signup'] = true;
 
 
 			/**

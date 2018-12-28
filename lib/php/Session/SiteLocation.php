@@ -1,13 +1,16 @@
 <?php
 
-namespace SystemCore;
+namespace SystemCore\Session;
 
 class SiteLocation
 {
     /**
-     *
      * Constructor
      *
+     * @param string    $location   Page location of client
+     * @param cxn       $db         Database connection
+     *
+     * @return void
      */
     public function __construct( $location, $db = false )
     {

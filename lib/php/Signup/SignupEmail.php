@@ -1,8 +1,8 @@
 <?php
 
-namespace SystemCore;
+namespace SystemCore\Signup;
 
-class SignupEmail extends email
+class SignupEmail extends \SystemCore\email
 {
 	/** @var string Unique identifier used to determining which email we are verifying */
 	private	$token = null;
@@ -19,7 +19,7 @@ class SignupEmail extends email
 	 * @param	string $email		Email address for new signup
 	 * @param	string $username	Desired username for the new signup
 	 *
-	 * @return bool
+	 * @return void
 	 */
 	public function __construct( $email, $username )
 	{

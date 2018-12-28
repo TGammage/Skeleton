@@ -32,6 +32,20 @@ input[type='submit'], input[type='button'], button
    cursor			: pointer;
 }
 
+hr
+{
+   margin      : 1rem 2rem;
+   border-top  : 1px solid rgba(255,200,0,.5);
+}
+
+quote
+{
+   margin            : .5rem 1rem;
+   padding           : .5rem 1rem;
+   background-color  : #060606;
+   border            : solid rgba(255,200,0,.5) thin;
+   display           : inline-block;
+}
 /**
 *		xdebug
 */

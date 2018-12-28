@@ -1,6 +1,6 @@
 <?php
 
-namespace SystemCore;
+namespace SystemCore\Session;
 
 class Session extends SessionFunctions
 {
@@ -26,7 +26,7 @@ class Session extends SessionFunctions
 	{
 		if( !parent::init() )
 		{
-			throw new ErrorHandler( 2, 'Could Not Start Session', __file__, 27  );
+			throw new \SystemCore\ErrorHandler( 2, 'Could Not Start Session', __file__, 27  );
 		}
 
 		self::session_login_check();
@@ -302,12 +302,15 @@ class Session extends SessionFunctions
 
 		if( $timestamp > $_SESSION['user']['last_updated'] )
 		{
-			$query = "SELECT `username`, `email`, `sec_level` FROM `member` WHERE `id` = ? LIMIT 1";
+			$query = "SELECT * FROM `profile_info` WHERE `id` = ? LIMIT 1";
 
 			$update = $this->db->query( $query, array( $_SESSION['user']['id'] ), \PDO::FETCH_ASSOC, true );
 
 			$_SESSION['user']['name']			= $update['username'];
+			$_SESSION['user']['first_name']		= $update['first_name'];
+			$_SESSION['user']['last_name']		= $update['last_name'];
 			$_SESSION['user']['email']			= $update['email'];
+			$_SESSION['user']['email_verified']	= $update['email_verified'];
 			$_SESSION['user']['last_updated']	= $timestamp;
 			$_SESSION['sec_level']				= $update['sec_level'];
 		}

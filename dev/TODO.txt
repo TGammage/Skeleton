@@ -1,20 +1,26 @@
 Apache
 	- Clean up verfiy email redirects
+	- Alias img-bin directory
 
-Update profile info from logged in position
-	- Names
-	- Password
-	- email
-
-Add Location updater
+php.ini
+	- fix gc.probability to eliminate
+	- lengthen session time to match 
 
 Add Clearance capabilities
+	- Restricting based of sec level
+	- Allowing for "Staff" members with privileges
+	- Allow for a "Guest" member than only has a temporary time limit
 
 Frame
 	- Add function to output raw js or css
 	- Can use this to make email HTML output
 
+HTML
+	- outputs some common html elements that are common over pages
+	- templates
+
 Tick
 	- Divide actions based off minute 
 	- DB clean up
 	- DB backup
+	- gc on specific ticks for cleaning purposes

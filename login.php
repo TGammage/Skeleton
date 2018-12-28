@@ -15,7 +15,7 @@ class Login
 	{
 		if( $_SERVER['REQUEST_METHOD'] === 'POST' )
 		{
-			$system = new SystemCore\CheckLogin;
+			$system = new SystemCore\Login\CheckLogin;
 			$system->redirect();
 
 			return;
@@ -23,7 +23,7 @@ class Login
 
 		if( isset( $_GET['logout'] ) )
 		{
-			$system = new SystemCore\CheckLogout;
+			$system = new SystemCore\Login\CheckLogout;
 			$system->redirect();
 
 			return;
@@ -80,7 +80,8 @@ class Login
 	<input type='password' name='access' placeholder='Password'$autofocus_access /><br>
 	<input type='submit' value='Login'/>
 </form>
-<a href='account_recovery.php'>Forgot My Password</a>";
+<a href='account_recovery.php'>Forgot My Password</a><br>
+<a href='signup.php'>Signup</a>";
 		}
 
 		$PAGE->end();
