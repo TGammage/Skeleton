@@ -30,7 +30,8 @@ $PAGE->begin();
 
 		echo "
 <p>
-<a href='" . $GLOBALS['conf']->host . "profile.php'>Profile</a>
+<a href='" . $GLOBALS['conf']->host . "profile.php'>Profile</a><br>
+<a href='" . $GLOBALS['conf']->host . "high_clearance.php'>Top Secret</a>
 </p>";
 
 		// var_dump( $_SESSION );

@@ -2,10 +2,6 @@ Apache
 	- Clean up verfiy email redirects
 	- Alias img-bin directory
 
-php.ini
-	- fix gc.probability to eliminate
-	- lengthen session time to match 
-
 Add Clearance capabilities
 	- Restricting based of sec level
 	- Allowing for "Staff" members with privileges

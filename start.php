@@ -87,6 +87,17 @@ if( defined( 'LOGGEDINONLY' ) && LOGGEDINONLY && !$GLOBALS['session']->logged_in
 }
 
 
+/**
+ *
+ *		Clearance
+ *
+ */
+
+ if( defined( 'CLEARANCE' ) && $GLOBALS['session']->logged_in )
+ {
+	new SystemCore\Session\Clearance;
+ }
+
 
 /**
  *
