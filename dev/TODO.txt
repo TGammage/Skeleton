@@ -2,10 +2,7 @@ Apache
 	- Clean up verfiy email redirects
 	- Alias img-bin directory
 
-Add Clearance capabilities
-	- Restricting based of sec level
-	- Allowing for "Staff" members with privileges
-	- Allow for a "Guest" member than only has a temporary time limit
+Add Temporary Guest Member capabilities
 
 Frame
 	- Add function to output raw js or css
