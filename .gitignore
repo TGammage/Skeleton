@@ -4,4 +4,6 @@
 # Logs #
 
 *.log
-log/*
+log/sys/*
+log/tick/*
+log/session/*
