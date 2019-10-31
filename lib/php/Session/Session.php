@@ -136,7 +136,7 @@ class Session extends SessionFunctions
 		// Update the Cookie Hash
 		setcookie(
 			'hash',
-			md5( session_id() . $_SERVER['HTTP_USER_AGENT'] . $_COOKIE['id'] . $_SESSION['session_hash'] ),
+			md5( session_id() . $_SERVER['HTTP_USER_AGENT'] . $_SERVER['REMOTE_ADDR'] . $_COOKIE['id'] . $_SESSION['session_hash'] ),
 			time() + $GLOBALS['conf']->cookie['life'],
 			'/',
 			'',
