@@ -1,4 +1,6 @@
 <?php
+define('LOCATION', 'Front Page');
+
 require "start.php";
 
 $PAGE = new HTML\Frame();

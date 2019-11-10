@@ -103,6 +103,8 @@ class email
 
 		if( !$this->error )
 		{
+			// echo exec("hostname");
+			// exit;
 			$this->sent = mail(
 				null,
 				$this->subject,

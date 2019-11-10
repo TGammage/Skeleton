@@ -20,7 +20,4 @@ HTML
 	- templates
 
 Tick
-	- Divide actions based off minute 
-	- DB clean up
 	- DB backup
-	- gc on specific ticks for cleaning purposes

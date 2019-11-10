@@ -198,7 +198,7 @@ class CheckLogin extends \SystemCore\check
 	 */
 	private function new_login()
 	{
-		$this->db = new \db( 'member' );
+		$this->db = new \db( 'tmp' );
 
 			self::generate_new_session();
 
@@ -265,7 +265,7 @@ class CheckLogin extends \SystemCore\check
 		if( !$this->success )
 			return;
 
-		$query = "SELECT * FROM `profile_info` WHERE `id` = " . $this->user_ID . " LIMIT 1";
+		$query = "SELECT * FROM {$GLOBALS['conf']->db['member']}.`profile_info` WHERE `id` = " . $this->user_ID . " LIMIT 1";
 
 		$criticals = $this->db->query( $query, null, \PDO::FETCH_ASSOC, true );
 

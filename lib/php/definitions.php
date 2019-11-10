@@ -52,28 +52,8 @@ if( !SYSTEM_REQUEST )
 	// Document root from http access
 	define( 'ROOT_DIR', $_SERVER['DOCUMENT_ROOT'] );
 } else {
-	// Find Document Root from script running on server
-	$path			= explode( DIRECTORY_SEPARATOR, getcwd() );
-	$ascend_dirs	= 0;
-	$root_to_cwd	= array();
-
-	foreach( $path as $dir )
-	{
-		if( $dir !== SITE_DIRECTORY )
-		{
-			$root_to_cwd[] = array_pop( $path );
-
-			$ascend_dirs++;
-		} else {
-			$root_to_cwd = array_reverse( $root_to_cwd );
-			break;
-		}
-		
-	}
-
-	$root = implode( DIRECTORY_SEPARATOR, $path );
-
-	define( 'ROOT_DIR', $root );
+	// Changed to current working directory in tick
+	define( 'ROOT_DIR', getcwd() );
 }
 
 
@@ -103,7 +83,7 @@ if( !SYSTEM_REQUEST )
 		define( 'IS_DEV', false );
 	}
 } else {
-	define( 'IS_DEV', false );
+	define( 'IS_DEV', true );
 }
 
 

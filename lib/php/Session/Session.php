@@ -40,9 +40,8 @@ class Session extends SessionFunctions
 
 		self::update_cookie_hash();
 
+		$this->db = $this->db ? $this->db : new \db( 'tmp' );
 
-		$this->db = new \db( 'member' );
-			
 			self::site_ban_check();
 
 			self::member_functions();
@@ -69,13 +68,39 @@ class Session extends SessionFunctions
 
 			if( $_COOKIE['hash'] === $match )
 			{
-				$this->logged_in = true;
+				$this->logged_in = self::session_alive();
 
 				return;
 			}
 		}
 
 		$this->logged_in = false;
+	}
+
+	/**
+	 * session_alive()
+	 * 
+	 * @purpose
+	 * 	To check with the database for an active session.
+	 * 	Tick will do a garbage clean up for sessions after a time
+	 * 	designated by the config. When sessions are cleaned from
+	 * 	the db, the client should no longer be logged in.
+	 * 
+	 * @return boolean session is active and valid
+	 */
+	protected function session_alive()
+	{
+		$this->db = new \db( 'tmp' );
+
+		$query = "SELECT * FROM `session` WHERE `session_id` = ? AND `user_agent` = ? AND `user_ip` = ?";
+
+		$param = array(
+			session_id(),
+			$_SERVER['HTTP_USER_AGENT'],
+			$_SERVER['REMOTE_ADDR']
+		);
+
+		return (bool) $this->db->query( $query, $param );
 	}
 
 	/**
@@ -158,7 +183,7 @@ class Session extends SessionFunctions
 		if( !$this->logged_in )
 		{
 			// Check for an ip ban only when not logged in
-			$query = "SELECT `finish_time` FROM `" . $GLOBALS['conf']->db['tmp'] . "`.`ip_banned` WHERE `ip` = ? LIMIT 1";
+			$query = "SELECT `finish_time` FROM `ip_banned` WHERE `ip` = ? LIMIT 1";
 
 			$param = array( $_SERVER['REMOTE_ADDR'] );
 
@@ -180,7 +205,7 @@ class Session extends SessionFunctions
 			}
 		} else {
 
-			$query = "( SELECT `finish_time` FROM `" . $GLOBALS['conf']->db['tmp'] . "`.`ip_banned` WHERE `ip` = ? LIMIT 1 ) UNION ALL ( SELECT `finish_time` FROM `" . $GLOBALS['conf']->db['tmp'] . "`.`account_banned` WHERE `id` = ? LIMIT 1 )";
+			$query = "( SELECT `finish_time` FROM `ip_banned` WHERE `ip` = ? LIMIT 1 ) UNION ALL ( SELECT `finish_time` FROM `account_banned` WHERE `id` = ? LIMIT 1 )";
 
 			$param = array( $_SERVER['REMOTE_ADDR'], $_SESSION['user']['id'] );
 	
@@ -294,7 +319,7 @@ class Session extends SessionFunctions
 	 */
 	public function update_session_user_info()
 	{
-		$query = "SELECT `last_updated` FROM `member` WHERE `id` = ? LIMIT 1";
+		$query = "SELECT `last_updated` FROM `{$GLOBALS['conf']->db['member']}`.`member` WHERE `id` = ? LIMIT 1";
 
 		$last_updated = $this->db->query( $query, array( $_SESSION['user']['id'] ), \PDO::FETCH_NUM, true );
 
@@ -302,7 +327,7 @@ class Session extends SessionFunctions
 
 		if( $timestamp > $_SESSION['user']['last_updated'] )
 		{
-			$query = "SELECT * FROM `profile_info` WHERE `id` = ? LIMIT 1";
+			$query = "SELECT `username`,`first_name`,`last_name`,`email`,`email_verified`,`sec_level` FROM `{$GLOBALS['conf']->db['member']}`.`profile_info` WHERE `id` = ? LIMIT 1";
 
 			$update = $this->db->query( $query, array( $_SESSION['user']['id'] ), \PDO::FETCH_ASSOC, true );
 
@@ -331,7 +356,7 @@ class Session extends SessionFunctions
 		// No longer logged in
 		$this->logged_in = false;
 
-		$db = new \db( 'member' );
+		$db = new \db( 'tmp' );
 
 		// Update Location
 		new SiteLocation( 'Logout', $db );

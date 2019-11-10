@@ -4,7 +4,7 @@ set run=y
 
 :run_tick
 cls
-php c:\wamp64\www\Skeleton\lib\php\tick\tick.php asd
+php c:\wamp64\www\Skeleton\lib\php\tick\tick.php Zero
 set run=n
 
 echo.

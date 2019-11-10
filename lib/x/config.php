@@ -2,10 +2,10 @@
 
 
 /**
-*
-*		Core Configuration
-*
-*/	
+ *
+ *		Core Configuration
+ *
+ */	
 
 namespace SystemCore;
 
@@ -18,25 +18,27 @@ class Config
 	public	$version		= '0.0.1';
 
 	// Timezone
-	public	$timezone		= 'EST';
+	public	$timezone		= 'America/Atikokan';
 
 	// Follow Daylight Saving Patterns
-	public	$daylightsaving	= false;
+	public	$daylightsaving	= true;
 
 	// Collective Setup Data
 	private	$data			= array();
 
 
 	/**
-	*
-	*		Construct
-	*
-	*/
+	 *
+	 *		Construct
+	 *
+	 */
 	public function __construct()
 	{
 		/**
-		*		Time Zone
-		*/
+		 *		Time Zone
+		 */
+		$this->timezone = $this->daylightsaving ? 'America/New_York' : $this->timezone;
+
 		ini_set( 'date.timezone', $this->timezone );
 
 		date_default_timezone_set( $this->timezone );
@@ -46,28 +48,28 @@ class Config
 
 
 	/**
-	*
-	*		Set Up Server
-	*
-	*/
+	 *
+	 *		Set Up Server
+	 *
+	 */
 	private function Setup( $dev = false )
 	{
 		if( $dev )
 		{
 			/**
-			*
-			*		Dev Version
-			*
-			*/
+			 *
+			 *		Dev Version
+			 *
+			 */
 
 			/**
-			*		Site Title
-			*/
+			 *		Site Title
+			 */
 			$this->data['site_title']	= 'Skeleton';
 
 			/**
-			*		Site Address
-			*/
+			 *		Site Address
+			 */
 			$this->data['subdomain']	= 'dev';
 			$this->data['base_domain']	= 'skeleton.localdev';
 			$this->data['domain']		= 'dev.skeleton.localdev';
@@ -76,8 +78,8 @@ class Config
 
 
 			/**
-			*		Site Directories
-			*/
+			 *		Site Directories
+			 */
 			$this->data['dir']['lib']		= ROOT_DIR . DIRECTORY_SEPARATOR . 'lib';
 			$this->data['dir']['dev']		= ROOT_DIR . DIRECTORY_SEPARATOR . 'dev';
 			$this->data['dir']['bin']		= ROOT_DIR . DIRECTORY_SEPARATOR . 'bin';
@@ -99,8 +101,8 @@ class Config
 
 
 			/**
-			*		Site URLs
-			*/
+			 *		Site URLs
+			 */
 			$this->data['url']['lib']		= $this->data['host'] . 'lib/';
 			$this->data['url']['dev']		= $this->data['host'] . 'dev/';
 			$this->data['url']['bin']		= $this->data['host'] . 'bin/';
@@ -114,8 +116,8 @@ class Config
 
 
 			/**
-			*		Cookie Data
-			*/
+			 *		Cookie Data
+			 */
 			$this->data['cookie']['session_name']	= 'Skeleton';
 			$this->data['cookie']['life']			= 60 * 60 * 24 * 7;
 
@@ -124,72 +126,72 @@ class Config
 
 
 			/**
-			*		Multiple Logged in Sessions
-			*
-			*		@purpose
-			*			Max number of simultaneous live sessions
-			*
-			*		@options
-			*			0 = Infinite
-			*			1 = Solo Session
-			*			2 = 2 Sessions
-			*			etc...
-			*/
+			 *		Multiple Logged in Sessions
+			 *
+			 *		@purpose
+			 *			Max number of simultaneous live sessions
+			 *
+			 *		@options
+			 *			0 = Infinite
+			 *			1 = Solo Session
+			 *			2 = 2 Sessions
+			 *			etc...
+			 */
 			$this->data['session']['simultaneous_count'] = 2;
 
 
 			/**
-			*		Maximum Sessions Handler
-			*
-			*		@purpose
-			*			When max number of sessions is reached and a new login occurs,
-			*			this is how we choose to dispose of a prior session.
-			*
-			*		@options
-			*			'session_created'	By oldest live session
-			*			'last_active'		By longest dormant session
-			*/
+			 *		Maximum Sessions Handler
+			 *
+			 *		@purpose
+			 *			When max number of sessions is reached and a new login occurs,
+			 *			this is how we choose to dispose of a prior session.
+			 *
+			 *		@options
+			 *			'session_created'	By oldest live session
+			 *			'last_active'		By longest dormant session
+			 */
 			$this->data['session']['max_bump_technique'] = 'last_active';
 
 			/**
-			*		Session Regeneration Timer
-			*/
+			 *		Session Regeneration Timer
+			 */
 			$this->data['session']['regenerate_after'] = 60 * 60 * 3;
 
 
 			/**
-			*		Login Identify By
-			*
-			*		@purpose
-			*			Method of checking credentials for a login
-			*
-			*		@options
-			*			'email'		email supplied
-			*			'username'	current alias
-			*/
+			 *		Login Identify By
+			 *
+			 *		@purpose
+			 *			Method of checking credentials for a login
+			 *
+			 *		@options
+			 *			'email'		email supplied
+			 *			'username'	current alias
+			 */
 			$this->data['login']['identify_by']	= 'username';
 
 			/**
-			* 		Login On Signup
-			*/
+			 * 		Login On Signup
+			 */
 			$this->data['login']['signup'] = true;
 
 
 			/**
-			*		Password Pepper
-			*/
+			 *		Password Pepper
+			 */
 			$this->data['password']['pepper']	= 'nm7OJe6TYEoXsxLn8nIyfFjHJFHSPG1i';
 			$this->data['password']['cost']		= 10;
 
 
 			/**
-			*		Database User Prefix
-			*/
+			 *		Database User Prefix
+			 */
 			$this->data['db']['prefix']		= 'skeleton_dev_';
 
 			/**
-			*		Site Databases
-			*/
+			 *		Site Databases
+			 */
 			$this->data['db']['main']	= $this->data['db']['prefix'] . 'main';
 			$this->data['db']['member']	= $this->data['db']['prefix'] . 'member';
 			$this->data['db']['backup']	= $this->data['db']['prefix'] . 'backup';
@@ -197,48 +199,48 @@ class Config
 
 
 				/**
-				*		Portal Credentials
-				*/
+				 *		Portal Credentials
+				 */
 				$this->data['db']['host']['portal']		= 'localhost';
 				$this->data['db']['user']['portal']		= $this->data['db']['prefix'] . 'portal';
 				$this->data['db']['access']['portal']	= 'EJVFxvzYuVVyrSbm';
 
 				/**
-				*		System Credentials
-				*/
+				 *		System Credentials
+				 */
 				$this->data['db']['host']['system']		= 'localhost';
 				$this->data['db']['user']['system']		= $this->data['db']['prefix'] . 'system';
 				$this->data['db']['access']['system']	= 'NojeGpLokdSiWnQLI';
 
 				/**
-				*		Staff Credentials
-				*/
+				 *		Staff Credentials
+				 */
 				$this->data['db']['host']['staff']		= 'localhost';
 				$this->data['db']['user']['staff']		= $this->data['db']['prefix'] . 'staff';
 				$this->data['db']['access']['staff']	= 'iWZkMZZS8XiOKuua';
 
 				/**
-				*		Tick Credentials
-				*/
+				 *		Tick Credentials
+				 */
 				$this->data['db']['host']['tick']		= 'localhost';
 				$this->data['db']['user']['tick']		= $this->data['db']['prefix'] . 'tick';
 				$this->data['db']['access']['tick']		= 'QmjeBfLTJiGfEaLD';
 
 		} else {
 			/**
-			*
-			*		Live Version
-			*
-			*/
+			 *
+			 *		Live Version
+			 *
+			 */
 
 			/**
-			*		Site Title
-			*/
+			 *		Site Title
+			 */
 			$this->data['site_title']	= 'Skeleton';
 
 			/**
-			*		Site Address
-			*/
+			 *		Site Address
+			 */
 			$this->data['subdomain']	= '';
 			$this->data['base_domain']	= 'skeleton.localdev';
 			$this->data['domain']		= 'skeleton.localdev';
@@ -247,8 +249,8 @@ class Config
 
 
 			/**
-			*		Site Directories
-			*/
+			 *		Site Directories
+			 */
 			$this->data['dir']['lib']		= ROOT_DIR . DIRECTORY_SEPARATOR . 'lib';
 			$this->data['dir']['dev']		= ROOT_DIR . DIRECTORY_SEPARATOR . 'dev';
 			$this->data['dir']['bin']		= ROOT_DIR . DIRECTORY_SEPARATOR . 'bin';
@@ -270,8 +272,8 @@ class Config
 
 
 			/**
-			*		Site URLs
-			*/
+			 *		Site URLs
+			 */
 			$this->data['url']['lib']		= $this->data['host'] . 'lib/';
 			$this->data['url']['dev']		= $this->data['host'] . 'dev/';
 			$this->data['url']['bin']		= $this->data['host'] . 'bin/';
@@ -285,8 +287,8 @@ class Config
 
 
 			/**
-			*		Cookie Data
-			*/
+			 *		Cookie Data
+			 */
 			$this->data['cookie']['session_name']	= 'Skeleton';
 			$this->data['cookie']['life']			= 60 * 60 * 24 * 7;
 
@@ -295,72 +297,72 @@ class Config
 
 
 			/**
-			*		Multiple Logged in Sessions
-			*
-			*		@purpose
-			*			Max number of simultaneous live sessions
-			*
-			*		@options
-			*			0 = Infinite
-			*			1 = Solo Session
-			*			2 = 2 Sessions
-			*			etc...
-			*/
+			 *		Multiple Logged in Sessions
+			 *
+			 *		@purpose
+			 *			Max number of simultaneous live sessions
+			 *
+			 *		@options
+			 *			0 = Infinite
+			 *			1 = Solo Session
+			 *			2 = 2 Sessions
+			 *			etc...
+			 */
 			$this->data['session']['simultaneous_count'] = 2;
 
 
 			/**
-			*		Maximum Sessions Handler
-			*
-			*		@purpose
-			*			When max number of sessions is reached and a new login occurs,
-			*			this is how we choose to dispose of a prior session.
-			*
-			*		@options
-			*			'session_created'	By oldest live session
-			*			'last_active'		By longest dormant session
-			*/
+			 *		Maximum Sessions Handler
+			 *
+			 *		@purpose
+			 *			When max number of sessions is reached and a new login occurs,
+			 *			this is how we choose to dispose of a prior session.
+			 *
+			 *		@options
+			 *			'session_created'	By oldest live session
+			 *			'last_active'		By longest dormant session
+			 */
 			$this->data['session']['max_bump_technique'] = 'last_active';
 
 			/**
-			*		Session Regeneration Timer
-			*/
+			 *		Session Regeneration Timer
+			 */
 			$this->data['session']['regenerate_after'] = 60 * 60 * 3;
 
 
 			/**
-			*		Login Identify By
-			*
-			*		@purpose
-			*			Method of checking credentials for a login
-			*
-			*		@options
-			*			'email'		email supplied
-			*			'username'	current alias
-			*/
+				*		Login Identify By
+				*
+				*		@purpose
+				*			Method of checking credentials for a login
+				*
+				*		@options
+				*			'email'		email supplied
+				*			'username'	current alias
+				*/
 			$this->data['login']['identify_by']	= 'username';
 
 			/**
-			* 		Login On Signup
-			*/
+			 * 		Login On Signup
+			 */
 			$this->data['login']['signup'] = true;
 
 
 			/**
-			*		Password Pepper
-			*/
+			 *		Password Pepper
+			 */
 			$this->data['password']['pepper']	= 'nm7OJe6TYEoXsxLn8nIyfFjHJFHSPG1i';
 			$this->data['password']['cost']		= 10;
 
 			
 			/**
-			*		Database User Prefix
-			*/
+			 *		Database User Prefix
+			 */
 			$this->data['db']['prefix']		= 'skeleton_';
 
 			/**
-			*		Site Databases
-			*/
+			 *		Site Databases
+			 */
 			$this->data['db']['main']	= $this->data['db']['prefix'] . 'main';
 			$this->data['db']['member']	= $this->data['db']['prefix'] . 'member';
 			$this->data['db']['backup']	= $this->data['db']['prefix'] . 'backup';
@@ -368,29 +370,29 @@ class Config
 
 
 				/**
-				*		Portal Credentials
-				*/
+				 *		Portal Credentials
+				 */
 				$this->data['db']['host']['portal']		= '';
 				$this->data['db']['user']['portal']		= $this->data['db']['prefix'] . 'portal';
 				$this->data['db']['access']['portal']	= '';
 
 				/**
-				*		System Credentials
-				*/
+				 *		System Credentials
+				 */
 				$this->data['db']['host']['system']		= '';
 				$this->data['db']['user']['system']		= $this->data['db']['prefix'] . 'system';
 				$this->data['db']['access']['system']	= '';
 
 				/**
-				*		Staff Credentials
-				*/
+				 *		Staff Credentials
+				 */
 				$this->data['db']['host']['staff']		= '';
 				$this->data['db']['user']['staff']		= $this->data['db']['prefix'] . 'staff';
 				$this->data['db']['access']['staff']	= '';
 
 				/**
-				*		Tick Credentials
-				*/
+				 *		Tick Credentials
+				 */
 				$this->data['db']['host']['tick']		= '';
 				$this->data['db']['user']['tick']		= $this->data['db']['prefix'] . 'tick';
 				$this->data['db']['access']['tick']		= '';

@@ -51,6 +51,11 @@ spl_autoload_register(
 				$pathname = $GLOBALS['conf']->dir['html'] . DIRECTORY_SEPARATOR;
 			break;
 
+			// ROOT_DIR\lib\php\tick
+			case 'Tick' :
+				$pathname = $GLOBALS['conf']->dir['tick'] . DIRECTORY_SEPARATOR;
+			break;
+
 			// ROOT_DIR\lib\php
 			default :
 				$pathname = $GLOBALS['conf']->dir['php'] . DIRECTORY_SEPARATOR;

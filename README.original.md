@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #Author
 	Travis Gammage
 
@@ -19,6 +18,3 @@
 		2) Local Live				: Prescreening for publishing to hosting server
 		3) Published Development	: Hosting server testing environment
 		4) Published Live			: Hosting server live version
-=======
-# Skeleton
->>>>>>> e670785dec7f37f385c7ad48d4731e907223459f

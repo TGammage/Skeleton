@@ -34,7 +34,7 @@ class AccountRecoveryEmail extends \SystemCore\email
 
 		parent::to( $_POST['email'], $username );
 
-		parent::from( "signup@" . $GLOBALS['conf']->base_domain, "System at " . $GLOBALS['conf']->site_title );
+		parent::from( "signup@" . $GLOBALS['conf']->domain, "System at " . $GLOBALS['conf']->site_title );
 
 		parent::subject( "Account Recovery at " . $GLOBALS['conf']->site_title );
 

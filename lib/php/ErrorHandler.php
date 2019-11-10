@@ -11,8 +11,9 @@ namespace SystemCore;
 
 /** Error Reporting Toggle */
 
-error_reporting( E_ALL );
-#error_reporting( 0 );
+error_reporting( 0 );
+
+if(IS_LOCAL) error_reporting( E_ALL );
 
 
 
@@ -46,7 +47,7 @@ class ErrorHandler extends \Exception
 		$this->date		= new \DateTime();
 
 
-		if( DEBUG )
+		if( DEBUG || IS_LOCAL )
 		{
 			// Debug Visible Responses
 			if( SYSTEM_REQUEST )
@@ -118,8 +119,9 @@ class ErrorHandler extends \Exception
 
 		// Where did this request come from
 		$host = !SYSTEM_REQUEST ? $_SERVER['HTTP_HOST'] : "NO HOST (SYSTEM_REQUEST)";
+		$uri  = !SYSTEM_REQUEST ? $_SERVER['REQUEST_URI'] : "NO URI (SYSTEM_REQUEST)";
 
-		$request_info = "HTTP_HOST : $host{$lf}SCRIPT_NAME : {$_SERVER['SCRIPT_NAME']}{$lf}REQUEST_URI : {$_SERVER['REQUEST_URI']}$lf$lf";
+		$request_info = "HTTP_HOST : $host{$lf}SCRIPT_NAME : {$_SERVER['SCRIPT_NAME']}{$lf}REQUEST_URI : {$uri}$lf$lf";
 
 		// Error Report Information
 		$report = "================================================$lf";

@@ -18,7 +18,7 @@ define( 'SITE_DIRECTORY', 'Skeleton' );
 
 
 $debug = true;
-#$debug = @$_GET['debug'] == true ? true : false;
+$debug = @$_GET['debug'] == true ? true : false;
 
 
 /**
@@ -49,8 +49,8 @@ $GLOBALS['conf'] = new SystemCore\Config;
  *
  */
 
-
-require $GLOBALS['conf']->dir['php'] . DIRECTORY_SEPARATOR . 'ErrorHandler.php';
+if( !SYSTEM_REQUEST )
+	require $GLOBALS['conf']->dir['php'] . DIRECTORY_SEPARATOR . 'ErrorHandler.php';
 
 
 /**
@@ -71,7 +71,7 @@ require $GLOBALS['conf']->dir['php'] . DIRECTORY_SEPARATOR . 'autoloader.php';
 
 if( !SYSTEM_REQUEST )
 	$GLOBALS['session'] = new SystemCore\Session\Session();
-
+// die('start death');
 
 /**
  *
