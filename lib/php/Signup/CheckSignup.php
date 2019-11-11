@@ -324,7 +324,10 @@ class CheckSignup extends \SystemCore\check
 		$_SESSION['url_key']['login']	= 'asd';
 		$_SESSION['var_key']['login']	= 'asd';
 
-		new \SystemCore\CheckLogin;
+		$login = new \SystemCore\Login\CheckLogin;
+
+		$login->redirect();
+		exit;
 	}
 
 	/**

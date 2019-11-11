@@ -41,8 +41,6 @@ class Profile
 	{
 		$PAGE = new HTML\Frame();
 
-        $PAGE->begin();
-
         $_SESSION['url_key']['profile']	= random::string( 16 );
         $_SESSION['var_key']['profile']	= random::string( 16 );
 
@@ -61,7 +59,7 @@ class Profile
 			$message = '';
 		}
 
-        echo "
+        $content = "
 <h3>Profile Information For : {$_SESSION['user']['name']}</h3>
 $message
 <form method='POST' action='?unique={$_SESSION['url_key']['profile']}'>
@@ -77,7 +75,9 @@ $message
 </form>
 <a href='main.php'>Main Page</a>";
 
-		$PAGE->end();
+		$PAGE->addContent( $content );
+
+		$PAGE->output();
 	}
 }
 ?>

@@ -11,13 +11,5 @@ Add Clearance capabilities
 	- Allowing for "Staff" members with privileges
 	- Allow for a "Guest" member than only has a temporary time limit
 
-Frame
-	- Add function to output raw js or css
-	- Can use this to make email HTML output
-
-HTML
-	- outputs some common html elements that are common over pages
-	- templates
-
 Tick
 	- DB backup

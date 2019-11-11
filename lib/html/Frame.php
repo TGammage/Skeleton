@@ -5,156 +5,210 @@ namespace HTML;
 class Frame
 {
 	/** @var array CSS Files to upload */
-	public	$css	= array(
-		"bootstrap.min",
-		"font-awesome.min",
-		"core"
+	public $css = array(
+		"bootstrap.min.css",
+		"font-awesome.min.css",
+		"core.css"
 	);
 
 	/** @var array Javascript Files to upload */
-	public	$js		= array(
-		"jquery-3.3.1.min",
-		"core"
+	public $js = array(
+		"jquery-3.3.1.min.js",
+		"core.js"
 	);
 
+	/** @var string Raw Javascript to add to heading */
+	protected $raw_js = '';
+
+	/** @var string Raw CSS to add to heading */
+	protected $raw_css = '';
+
+	/** @var string Raw HTML to add to body */
+	protected $content = '';
+
 	/** @var string Title of Page */
-	public	$title = "Skeleton";
+	public $title = "Skeleton";
 
-	/** @var bool Output a blank page */
-	public	$blank_page	= false;
+	/** @var string Hexidecimal theme color of page */
+	public $theme = '#FFF';
 
-	/**
-	*		begin()
-	*
-	*		@purpose
-	*			Commences self::head() and self::body_start()
-	*
-	*		@return void
-	*/
-	public function begin()
-	{
-		self::head();
+	/** @var string HTML template to use */
+	public $template = false;
 
-		self::body_start();
-	}
+
 
 	/**
-	*		end()
-	*
-	*		@purpose
-	*			Alias of self::body_close()
-	*
-	*		@return void
-	*/
-	public function end()
-	{
-		self::body_close();
-	}
+	 * @var bool Output a blank page
+	 * 
+	 * NOTE : This will prevent the loading of modules
+	 */
+	public $blank = false;
+
+
+	// ----------------------
+	// 		Methods
+	// ----------------------
 
 	/**
-	*		head()
-	*
-	*		@purpose
-	*			Outputs the <head> portion of the html page
-	*
-	*		@param string $prepend_title	Page title override
-	*
-	*		@return void
-	*/
-	public function head( $prepend_title = true )
+	 * title()
+	 *
+	 * @purpose
+	 * 	Get the title of the page, and add local and dev designations
+	 *
+	 * @return string HTML title of the page
+	 */
+	public function title()
 	{
 		// Page Title
 		$env		= IS_DEV ? "DEV" : "LIVE";
 		$prefix		= IS_LOCAL ? "(Localhost|$env) " : '';
-		$prepend	= $prepend_title ? $prefix : '';
-		$title		= $prepend . $this->title ;
+		$prepend	= IS_DEV ? $prefix : '';
 
-		echo "<!DOCTYPE html>
-<html>
-<head>
-
-<meta charset=\"UTF-8\">
-<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\">
-<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\r\n\r\n";
-
-		self::css();
-
-		self::js();
-
-		echo "\r\n<title>$title</title>\r\n\r\n</head>\r\n\r\n";
+		return $prepend . $this->title ;
 	}
 
 	/**
-	*		body_start()
-	*
-	*		@purpose
-	*			Outputs starting body tag and navbars by default
-	*
-	*		@return void
-	*/
-	public function body_start()
-	{
-		// Blank Page
-		if( !$this->blank_page )
-		{
-
-			echo "<body>\r\n\r\n";
-		
-		} else {
-
-			echo "<body>\r\n\r\n";
-
-			//Navbar::heading();
-		}
-	}
-
-	/**
-	*		css()
-	*
-	*		@purpose
-	*			Write out HTML to load CSS stylesheets
-	*
-	*		@return void
-	*/
-	protected function css()
-	{
-		foreach( $this->css as $css )
-		{
-			$file = $GLOBALS['conf']->url['css'] . "$css";
-
-			echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$file.css\">\r\n";
-		}
-	}
-
-	/**
-	*		js()
-	*
-	*		@purpose
-	*			Write out HTML to load CSS stylesheets
-	*
-	*		@return void
-	*/
+	 * js()
+	 *
+	 * @purpose
+	 *	Write out HTML to load CSS stylesheets
+	 *
+	 * @return void
+	 */
 	protected function js()
 	{
+		$load = '';
+
 		foreach( $this->js as $js )
 		{
-			$file = $GLOBALS['conf']->url['js'] . "$js";
+			$file = $GLOBALS['conf']->url['js'] . $js;
 
-			echo "<script type=\"text/javascript\" src=\"$file.js\"></script>\r\n";
+			$load .= "\t<script type='text/javascript' src='$file'></script>\r\n";
 		}
+
+		return $load;
 	}
 
 	/**
-	*		body_close()
-	*
-	*		@purpose
-	*			Outputs closing body and html tags
-	*
-	*		@return void
-	*/
-	public function body_close()
+	 * css()
+	 *
+	 * @purpose
+	 *	Write out HTML to load CSS stylesheets
+	 *
+	 * @return string HTML output for linking css files
+	 */
+	protected function css()
 	{
-		echo "\r\n\r\n</body>\r\n</html>";
+		$load = '';
+
+		foreach( $this->css as $css )
+		{
+			$file = $GLOBALS['conf']->url['css'] . $css;
+
+			$load .= "\t<link rel='stylesheet' type='text/css' href='$file'>\r\n";
+		}
+
+		return $load;
+	}
+
+	/**
+	 * addJs()
+	 *
+	 * @purpose
+	 * 	Add raw javascript to a page
+	 *
+	 * @var string $js javascript code to add
+	 *
+	 * @return void
+	 */
+	public function addJs( $js )
+	{
+		$this->raw_js .= $js;
+	}
+
+	/**
+	 * addCss()
+	 *
+	 * @purpose
+	 * 	Add raw styles to a page
+	 *
+	 * @var string $css stylesheet info to add to page
+	 *
+	 * @return void
+	 */
+	public function addCss( $css )
+	{
+		$this->raw_css .= $css;
+	}
+
+	/**
+	 * addContent()
+	 *
+	 * @purpose
+	 * 	Add raw HTML to a page
+	 *
+	 * @var string $html HTML to add to page
+	 *
+	 * @return void
+	 */
+	public function addContent( $html )
+	{
+		$this->content .= $html;
+	}
+
+	/**
+	 * output()
+	 * 
+	 * @purpose
+	 * 	Create and print the HTML page
+	 */
+	public function output()
+	{
+		$vars = array(
+			'theme_color'	=> $this->theme,
+			'title'			=> '',
+			'modules_css'	=> '',
+			'modules_js'	=> '',
+			'raw_js'		=> '',
+			'raw_css'		=> '',
+			'header'		=> '',
+			'content'		=> '',
+			'footer'		=> '',
+			'post_js'		=> ''
+		);
+
+		// Get title of the page
+		$vars['title'] = $this->title();
+
+		// Get js modules
+		$vars['modules_js'] = $this->js();
+
+		// Get css modules
+		$vars['modules_css'] = $this->css();
+
+		// Get raw js
+		$vars['raw_js'] = strlen( $this->raw_js ) > 0 ? "\r\n<script type='text/javascript' language='javascript'>{$this->raw_js}</script>\r\n" : '';
+
+		// Get raw css
+		$vars['raw_css'] = strlen( $this->raw_css ) > 0 ? "\r\n<style rel='stylesheet'>{$this->raw_css}</style>\r\n" : '';
+
+		// Get Page Content
+		$vars['content'] = "\r\n{$this->content}\r\n";
+
+		// Determine what template to use
+		$template = $this->template ? $this->template : $GLOBALS['conf']->dir['html'] . DIRECTORY_SEPARATOR . 'default.tpl';
+
+		$HTML = file_get_contents( $template );
+
+		foreach( $vars as $key => $value )
+		{
+			$HTML = preg_replace( "/\{$key\}/", $value, $HTML );
+		}
+
+		print $HTML;
+		
+		// Determine if a blank page
+		// if( true ){}
 	}
 }
 ?>
